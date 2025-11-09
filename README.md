@@ -1,16 +1,84 @@
-# React + Vite
+import React, { useState, useEffect } from "react";
+import slide2 from "../../assets/2.png";
+import slide3 from "../../assets/3.png";
+import slide4 from "../../assets/4.png";
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+const slides = [
+  {
+    id: 1,
+    title: "Track Your Habits Effortlessly",
+    subtitle: "Build consistency with daily goals and visual progress.",
+    image: slide2,
+  },
+  {
+    id: 2,
+    title: "Stay Motivated Every Day",
+    subtitle: "Get reminders, streaks, and rewards for staying on track.",
+    image: slide3,
+  },
+  {
+    id: 3,
+    title: "Your Personal Habit Dashboard",
+    subtitle: "Customize your routine and monitor growth over time.",
+    image: slide4,
+  },
+];
 
-Currently, two official plugins are available:
+const HeroSlider = () => {
+  const [current, setCurrent] = useState(0);
+  console.log("slide2:", slide2);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  return (
+    <div className="relative w-full h-[60vh] overflow-hidden rounded-3xl shadow-2xl">
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+          }`}
+        >
+          <div style={{ height: "300px", border: "2px solid red" }}>
+            <img
+              src={slide2}
+              alt="Test"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
 
-## React Compiler
+          {/* <img
+            src={slide.image}
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          /> */}
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              {slide.title}
+            </h1>
+            <p className="text-lg md:text-xl text-gray-200">{slide.subtitle}</p>
+          </div>
+        </div>
+      ))}
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+      {/* Manual navigation */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-3 h-3 rounded-full ${
+              i === current ? "bg-white" : "bg-gray-400"
+            }`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+export default HeroSlider;

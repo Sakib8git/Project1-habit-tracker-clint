@@ -93,7 +93,7 @@ const NavBar = () => {
         </div>
 
         {/* End: Auth Buttons or Avatar */}
-        <div className="navbar-end">
+        <div className="navbar-end z-50">
           {loading ? (
             <Loader />
           ) : !user ? (

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-
+import './Button.css';
 const habits = [
   {
     id: 1,
@@ -77,10 +77,7 @@ const HabbitCard = () => {
             <p className="text-xs text-gray-500 italic group-hover:text-gray-700">
               Creator: {habit.creator}
             </p>
-            <button
-              onClick={() => handleViewDetails(habit.id)}
-              className="mt-3 lg:inline-flex items-center gap-3 group-hover:bg-lime-600 bg-lime-500 shadow-[10px_10px_150px_#ff9f0d] hover:shadow-[0_0_30px_#abd373] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full text-white hover:text-white transition-all"
-            >
+            <button onClick={() => handleViewDetails(habit.id)} className="btnCus">
               View Details
             </button>
           </div>
