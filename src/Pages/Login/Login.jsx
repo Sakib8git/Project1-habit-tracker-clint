@@ -92,7 +92,7 @@ const Login = () => {
 export default Login;
 
 const StyledWrapper = styled.div`
-  background: #1f293a;
+  background: rgb(224, 242, 254);
   min-height: 100vh;
   display: flex;
   align-items: center;

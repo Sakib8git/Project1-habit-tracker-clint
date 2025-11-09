@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Register = () => {
-  const { createWithEmail, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
+  const { createWithEmail, signInWithGoogle, updateUserProfile } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -18,7 +19,12 @@ const Register = () => {
     const hasUpper = /[A-Z]/.test(pwd);
     const hasLower = /[a-z]/.test(pwd);
     const hasMinLen = pwd.length >= 6;
-    return { hasUpper, hasLower, hasMinLen, valid: hasUpper && hasLower && hasMinLen };
+    return {
+      hasUpper,
+      hasLower,
+      hasMinLen,
+      valid: hasUpper && hasLower && hasMinLen,
+    };
   };
 
   const handleRegister = async (e) => {
@@ -41,7 +47,10 @@ const Register = () => {
     }
 
     if (typeof createWithEmail !== "function") {
-      console.error("createWithEmail is not available on AuthContext", createWithEmail);
+      console.error(
+        "createWithEmail is not available on AuthContext",
+        createWithEmail
+      );
       toast.error("Registration service not available");
       return;
     }
@@ -102,7 +111,13 @@ const Register = () => {
         <h2>Register to HabitTracker</h2>
 
         <Field>
-          <input name="name" type="text" required value={name} onChange={(e) => setName(e.target.value)} />
+          <input
+            name="name"
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
           <label>
             {"Username".split("").map((c, i) => (
               <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
@@ -113,7 +128,13 @@ const Register = () => {
         </Field>
 
         <Field>
-          <input name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            name="email"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <label>
             {"Email".split("").map((c, i) => (
               <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
@@ -124,7 +145,12 @@ const Register = () => {
         </Field>
 
         <Field>
-          <input name="photoURL" type="text" value={photoURL} onChange={(e) => setPhotoURL(e.target.value)} />
+          <input
+            name="photoURL"
+            type="text"
+            value={photoURL}
+            onChange={(e) => setPhotoURL(e.target.value)}
+          />
           <label>
             {"Photo URL".split("").map((c, i) => (
               <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
@@ -135,7 +161,13 @@ const Register = () => {
         </Field>
 
         <Field>
-          <input name="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            name="password"
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <label>
             {"Password".split("").map((c, i) => (
               <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
@@ -150,7 +182,11 @@ const Register = () => {
         </button>
 
         <button type="button" className="outline" onClick={handleGoogle}>
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="g-icon" />
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="Google"
+            className="g-icon"
+          />
           Continue with Google
         </button>
 
@@ -171,29 +207,93 @@ const PageWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #0b1220 0%, #0f1724 100%);
+
+  background: rgb(224, 242, 254);
 `;
 const Card = styled.form`
   width: 100%;
   max-width: 420px;
   padding: 2rem;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgb(0, 0, 0);
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
   backdrop-filter: blur(6px);
   color: #e6eef8;
-  h2 { text-align:center; margin-bottom:1.25rem; font-size:1.25rem; color:#bfe3c0; }
-  .g-icon { width:18px; height:18px; }
-  .primary, .outline { width:100%; padding:12px 14px; border-radius:999px; font-weight:700; cursor:pointer; margin-top:0.75rem; border:none; }
-  .primary { background: linear-gradient(90deg,#6ee7b7,#34d399); color:#06312a; }
-  .outline { background: rgba(255,255,255,0.04); color:#e6eef8; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; gap:8px; }
-  .muted { text-align:center; margin-top:0.9rem; color:#9fb1c8; }
+  h2 {
+    text-align: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    color: #bfe3c0;
+  }
+  .g-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .primary,
+  .outline {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.75rem;
+    border: none;
+  }
+  .primary {
+    background: linear-gradient(90deg, #6ee7b7, #34d399);
+    color: #06312a;
+  }
+  .outline {
+    background: rgba(255, 255, 255, 0.04);
+    color: #e6eef8;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .muted {
+    text-align: center;
+    margin-top: 0.9rem;
+    color: #9fb1c8;
+  }
 `;
 const Field = styled.div`
-  position: relative; margin:18px 0 28px; width:100%;
-  input { background-color:transparent; border:0; border-bottom:2px rgba(255,255,255,0.18); display:block; width:100%; padding:14px 0; font-size:16px; color:#eaf6ff; }
-  input:focus, input:valid { outline:0; border-bottom-color:#7dd3fc; }
-  label { position:absolute; top:14px; left:0; pointer-events:none; }
-  label span { display:inline-block; font-size:16px; min-width:6px; color:rgba(255,255,255,0.65); transition: transform 0.32s cubic-bezier(0.68,-0.55,0.265,1.55), color 0.2s; }
-  input:focus + label span, input:valid + label span { color:#7dd3fc; transform:translateY(-30px); }
+  position: relative;
+  margin: 18px 0 28px;
+  width: 100%;
+  input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px rgba(255, 255, 255, 0.18);
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    font-size: 16px;
+    color: #eaf6ff;
+  }
+  input:focus,
+  input:valid {
+    outline: 0;
+    border-bottom-color: #7dd3fc;
+  }
+  label {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    pointer-events: none;
+  }
+  label span {
+    display: inline-block;
+    font-size: 16px;
+    min-width: 6px;
+    color: rgba(255, 255, 255, 0.65);
+    transition: transform 0.32s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+      color 0.2s;
+  }
+  input:focus + label span,
+  input:valid + label span {
+    color: #7dd3fc;
+    transform: translateY(-30px);
+  }
 `;

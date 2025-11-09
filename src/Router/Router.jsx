@@ -8,6 +8,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "../Main/PrivateRoute";
 import NotFound from "../Components/404/NotFound";
+import HabitDetails from "../Pages/HabitDetails/HabitDetails"; // ✅ NEW IMPORT
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "habits/:id", // ✅ NEW ROUTE ADDED
+        element: (
+          <PrivateRoute>
+            <HabitDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },

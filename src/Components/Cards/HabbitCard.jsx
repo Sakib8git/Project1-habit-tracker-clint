@@ -1,51 +1,59 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const habits = [
   {
     id: 1,
     title: "Morning Meditation",
     description: "Start your day with 10 minutes of mindfulness.",
-    price: "$0.00",
+    creator: "Ayesha",
     color: "from-green-400 to-green-600",
   },
   {
     id: 2,
     title: "Drink Water",
     description: "Stay hydrated by drinking 8 glasses daily.",
-    price: "$0.00",
+    creator: "Rafi",
     color: "from-blue-400 to-blue-600",
   },
   {
     id: 3,
     title: "Read Books",
     description: "Read at least 20 pages every day.",
-    price: "$0.00",
+    creator: "Tanvir",
     color: "from-purple-400 to-purple-600",
   },
   {
     id: 4,
     title: "Workout",
     description: "Exercise for 30 minutes to stay fit.",
-    price: "$0.00",
+    creator: "Public",
     color: "from-red-400 to-red-600",
   },
   {
     id: 5,
     title: "Sleep Early",
     description: "Go to bed before 11 PM for better rest.",
-    price: "$0.00",
+    creator: "Public",
     color: "from-yellow-400 to-yellow-600",
   },
   {
     id: 6,
     title: "Journal",
     description: "Write down your thoughts and goals daily.",
-    price: "$0.00",
+    creator: "Ayesha",
     color: "from-pink-400 to-pink-600",
   },
 ];
 
 const HabbitCard = () => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = (id) => {
+    // Redirect to habit details page (login required)
+    navigate(`/habits/${id}`);
+  };
+
   return (
     <section className="py-12 px-6">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
@@ -66,14 +74,15 @@ const HabbitCard = () => {
             <p className="font-semibold text-gray-600 text-xs text-center group-hover:text-gray-800">
               {habit.description}
             </p>
-            <div className="flex flex-row justify-between items-center w-full mt-2">
-              <p className="text-lime-700 font-semibold group-hover:text-gray-900">
-                {habit.price}
-              </p>
-              <button className="lg:inline-flex items-center gap-3 group-hover:bg-lime-600 bg-lime-500 shadow-[10px_10px_150px_#ff9f0d] hover:shadow-[0_0_30px_#abd373] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full text-white hover:text-white transition-all">
-                Track Now
-              </button>
-            </div>
+            <p className="text-xs text-gray-500 italic group-hover:text-gray-700">
+              Creator: {habit.creator}
+            </p>
+            <button
+              onClick={() => handleViewDetails(habit.id)}
+              className="mt-3 lg:inline-flex items-center gap-3 group-hover:bg-lime-600 bg-lime-500 shadow-[10px_10px_150px_#ff9f0d] hover:shadow-[0_0_30px_#abd373] cursor-pointer py-2 px-4 text-sm font-semibold rounded-full text-white hover:text-white transition-all"
+            >
+              View Details
+            </button>
           </div>
         ))}
       </div>
