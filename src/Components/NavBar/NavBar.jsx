@@ -6,9 +6,10 @@ import { AuthContext } from "../../AuthContext/AuthContext";
 import { FaUserEdit } from "react-icons/fa";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../Firebase/firebase";
+import Loader from "../Loader/Loader";
 
 const NavBar = () => {
-  const { user, logOut, refreshNavUser } = useContext(AuthContext);
+  const { user, logOut, refreshNavUser, loading } = useContext(AuthContext);
 
   const signOutUser = async () => {
     try {
@@ -64,7 +65,7 @@ const NavBar = () => {
             </ul>
           </div>
 
-          <Link to="/" className="btn btn-ghost text-xl text-primary font-bold">
+          <Link to="/" className=" text-xl text-primary font-bold">
             HabitTracker
           </Link>
         </div>
@@ -76,15 +77,15 @@ const NavBar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             {user && (
-                <>
-                  <li>
-                    <NavLink to="/add-habit">Add Habit</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/my-habits">My Habits</NavLink>
-                  </li>
-                </>
-              )}
+              <>
+                <li>
+                  <NavLink to="/add-habit">Add Habit</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my-habits">My Habits</NavLink>
+                </li>
+              </>
+            )}
             <li>
               <NavLink to="/browse">Browse Public Habits</NavLink>
             </li>
@@ -93,7 +94,9 @@ const NavBar = () => {
 
         {/* End: Auth Buttons or Avatar */}
         <div className="navbar-end">
-          {!user ? (
+          {loading ? (
+            <Loader />
+          ) : !user ? (
             <div className="flex gap-2 items-center">
               <StyledWrapper>
                 <Link to="/login">

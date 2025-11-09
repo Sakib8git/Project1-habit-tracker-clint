@@ -1,223 +1,210 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import styled from "styled-components";
-// adjust path if needed
-
-import { AuthContext } from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const Register = () => {
-  const { createWithEmail, updateUserProfile, signInWithGoogle } =
-    useContext(AuthContext);
+  const { createWithEmail, signInWithGoogle, updateUserProfile, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  // 🔐 Password validation
-  const isValidPassword = (pass) => {
-    const hasUpper = /[A-Z]/.test(pass);
-    const hasLower = /[a-z]/.test(pass);
-    return pass.length >= 6 && hasUpper && hasLower;
+  const validatePassword = (pwd) => {
+    const hasUpper = /[A-Z]/.test(pwd);
+    const hasLower = /[a-z]/.test(pwd);
+    const hasMinLen = pwd.length >= 6;
+    return { hasUpper, hasLower, hasMinLen, valid: hasUpper && hasLower && hasMinLen };
   };
 
-  // 📝 Register handler
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!isValidPassword(password)) {
-      toast.error(
-        "Password must be at least 6 characters, with uppercase and lowercase letters."
-      );
+
+    const { hasUpper, hasLower, hasMinLen, valid } = validatePassword(password);
+
+    if (!name.trim()) {
+      toast.error("Name is required");
       return;
     }
 
+    if (!valid) {
+      const msgs = [];
+      if (!hasUpper) msgs.push("an uppercase letter");
+      if (!hasLower) msgs.push("a lowercase letter");
+      if (!hasMinLen) msgs.push("at least 6 characters");
+      toast.error(`Password must contain ${msgs.join(", ")}`);
+      return;
+    }
+
+    if (typeof createWithEmail !== "function") {
+      console.error("createWithEmail is not available on AuthContext", createWithEmail);
+      toast.error("Registration service not available");
+      return;
+    }
+
+    setSubmitting(true);
     try {
+      // create user
       const res = await createWithEmail(email, password);
-      await updateUserProfile({ displayName: name, photoURL });
-      toast.success("Account created successfully");
-      navigate("/");
+      toast.success("Registration successful");
+
+      // update profile if provider exposes updateUserProfile
+      if (typeof updateUserProfile === "function") {
+        try {
+          await updateUserProfile({ displayName: name, photoURL });
+        } catch (updErr) {
+          console.error("update profile error:", updErr);
+          toast.info("Registered but profile update failed");
+        }
+      }
+
+      // log out then navigate to login (as requested)
+      if (typeof logOut === "function") {
+        try {
+          await logOut();
+        } catch (logoutErr) {
+          console.error("logout after register failed:", logoutErr);
+          // even if logout fails, still navigate to login
+        }
+      } else {
+        console.warn("logOut is not available on AuthContext");
+      }
+
+      navigate("/login");
     } catch (err) {
-      toast.error(err.message);
+      console.error("register error:", err);
+      const code = err?.code || "";
+      if (code === "auth/email-already-in-use") {
+        toast.error("This email is already registered. Please login.");
+      } else if (code === "auth/weak-password") {
+        toast.error("Password should be at least 6 characters.");
+      } else if (code === "auth/invalid-email") {
+        toast.error("Please enter a valid email address.");
+      } else {
+        toast.error(err?.message || "Registration failed. Try again.");
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  // 🔵 Google login
-  const handleGoogleLogin = async () => {
+  const handleGoogle = async () => {
+    if (typeof signInWithGoogle !== "function") {
+      toast.error("Google sign-in not available");
+      return;
+    }
     try {
       await signInWithGoogle();
-      toast.success("Google login successful");
+      toast.success("Google signup successful");
       navigate("/");
     } catch (err) {
-      toast.error(err.message);
+      console.error("google signup error:", err);
+      toast.error(err?.message || "Google signup failed");
     }
   };
 
   return (
-    <StyledWrapper className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-slate-800 px-4">
-      <form
-        onSubmit={handleRegister}
-        className="w-full max-w-md bg-base-100 p-8 rounded-lg shadow-lg"
-      >
-        <h2 className="text-2xl font-bold text-center mb-6 text-primary">
-          Create Your Account
-        </h2>
+    <PageWrapper>
+      <Card onSubmit={handleRegister}>
+        <h2>Register to HabitTracker</h2>
 
-        {/* Animated Name Input */}
-        <div className="mb-6">
-          <div className="form-control">
-            <input
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <label>
-              {"Name".split("").map((char, i) => (
-                <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {char}
-                </span>
-              ))}
-            </label>
-          </div>
-        </div>
+        <Field>
+          <input name="name" type="text" required value={name} onChange={(e) => setName(e.target.value)} />
+          <label>
+            {"Username".split("").map((c, i) => (
+              <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
+                {c}
+              </span>
+            ))}
+          </label>
+        </Field>
 
-        {/* Animated Email Input */}
-        <div className="mb-6">
-          <div className="form-control">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label>
-              {"Email".split("").map((char, i) => (
-                <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {char}
-                </span>
-              ))}
-            </label>
-          </div>
-        </div>
+        <Field>
+          <input name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label>
+            {"Email".split("").map((c, i) => (
+              <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
+                {c}
+              </span>
+            ))}
+          </label>
+        </Field>
 
-        {/* Animated PhotoURL Input */}
-        <div className="mb-6">
-          <div className="form-control">
-            <input
-              type="text"
-              required
-              value={photoURL}
-              onChange={(e) => setPhotoURL(e.target.value)}
-            />
-            <label>
-              {"Photo URL".split("").map((char, i) => (
-                <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {char}
-                </span>
-              ))}
-            </label>
-          </div>
-        </div>
+        <Field>
+          <input name="photoURL" type="text" value={photoURL} onChange={(e) => setPhotoURL(e.target.value)} />
+          <label>
+            {"Photo URL".split("").map((c, i) => (
+              <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
+                {c}
+              </span>
+            ))}
+          </label>
+        </Field>
 
-        {/* Animated Password Input */}
-        <div className="mb-6">
-          <div className="form-control">
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label>
-              {"Password".split("").map((char, i) => (
-                <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {char}
-                </span>
-              ))}
-            </label>
-          </div>
-        </div>
+        <Field>
+          <input name="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label>
+            {"Password".split("").map((c, i) => (
+              <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
+                {c}
+              </span>
+            ))}
+          </label>
+        </Field>
 
-        {/* Register Button */}
-        <button type="submit" className="btn btn-primary w-full mb-4">
-          Register
+        <button className="primary" type="submit" disabled={submitting}>
+          {submitting ? "Registering..." : "Register"}
         </button>
 
-        {/* Google Login */}
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="btn btn-outline w-full mb-6 flex items-center justify-center gap-2"
-        >
-          <img
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
-            className="w-5 h-5"
-          />
+        <button type="button" className="outline" onClick={handleGoogle}>
+          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="g-icon" />
           Continue with Google
         </button>
 
-        {/* Login Link */}
-        <p className="text-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="text-primary font-medium hover:underline"
-          >
-            Login here
-          </Link>
+        <p className="muted">
+          Already have an account? <Link to="/login">Login here</Link>
         </p>
-      </form>
-    </StyledWrapper>
+      </Card>
+    </PageWrapper>
   );
 };
 
 export default Register;
 
-const StyledWrapper = styled.div`
-  .form-control {
-    position: relative;
-    margin: 20px 0 40px;
-    width: 100%;
-  }
-
-  .form-control input {
-    background-color: transparent;
-    border: 0;
-    border-bottom: 2px #ccc solid;
-    display: block;
-    width: 100%;
-    padding: 15px 0;
-    font-size: 18px;
-    color: #333;
-  }
-
-  .form-control input:focus,
-  .form-control input:valid {
-    outline: 0;
-    border-bottom-color: #3b82f6;
-  }
-
-  .form-control label {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    pointer-events: none;
-  }
-
-  .form-control label span {
-    display: inline-block;
-    font-size: 18px;
-    min-width: 5px;
-    color: #999;
-    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  .form-control input:focus + label span,
-  .form-control input:valid + label span {
-    color: #3b82f6;
-    transform: translateY(-30px);
-  }
+/* Styled components (same as before) */
+const PageWrapper = styled.div`
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #0b1220 0%, #0f1724 100%);
+`;
+const Card = styled.form`
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(6px);
+  color: #e6eef8;
+  h2 { text-align:center; margin-bottom:1.25rem; font-size:1.25rem; color:#bfe3c0; }
+  .g-icon { width:18px; height:18px; }
+  .primary, .outline { width:100%; padding:12px 14px; border-radius:999px; font-weight:700; cursor:pointer; margin-top:0.75rem; border:none; }
+  .primary { background: linear-gradient(90deg,#6ee7b7,#34d399); color:#06312a; }
+  .outline { background: rgba(255,255,255,0.04); color:#e6eef8; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; gap:8px; }
+  .muted { text-align:center; margin-top:0.9rem; color:#9fb1c8; }
+`;
+const Field = styled.div`
+  position: relative; margin:18px 0 28px; width:100%;
+  input { background-color:transparent; border:0; border-bottom:2px rgba(255,255,255,0.18); display:block; width:100%; padding:14px 0; font-size:16px; color:#eaf6ff; }
+  input:focus, input:valid { outline:0; border-bottom-color:#7dd3fc; }
+  label { position:absolute; top:14px; left:0; pointer-events:none; }
+  label span { display:inline-block; font-size:16px; min-width:6px; color:rgba(255,255,255,0.65); transition: transform 0.32s cubic-bezier(0.68,-0.55,0.265,1.55), color 0.2s; }
+  input:focus + label span, input:valid + label span { color:#7dd3fc; transform:translateY(-30px); }
 `;
