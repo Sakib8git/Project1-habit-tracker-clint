@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
 import styled from "styled-components";
 import { AuthContext } from "../../AuthContext/AuthContext";
 import { toast } from "react-toastify";
- // adjust path if needed
-
+import { useNavigate, Link } from "react-router";
 
 const Login = () => {
   const { signInWithEmail, signInWithGoogle } = useContext(AuthContext);
@@ -13,7 +11,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // 🔐 Email/password login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -25,7 +22,6 @@ const Login = () => {
     }
   };
 
-  // 🔵 Google login
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle();
@@ -37,132 +33,216 @@ const Login = () => {
   };
 
   return (
-    <StyledWrapper className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-slate-800 px-4">
-      <form
-        onSubmit={handleLogin}
-        className="w-full max-w-md bg-base-100 p-8 rounded-lg shadow-lg"
-      >
-        <h2 className="text-2xl font-bold text-center mb-6 text-primary">
-          Login to HabitTracker
-        </h2>
-
-        {/* Animated Email Input */}
-        <div className="mb-6">
-          <div className="form-control">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label>
-              {"Email".split("").map((char, i) => (
-                <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {char}
-                </span>
-              ))}
-            </label>
-          </div>
+    <StyledWrapper>
+      <div className="container">
+        <div className="login-box">
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <div className="input-box">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <label>Email</label>
+            </div>
+            <div className="input-box">
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <label>Password</label>
+            </div>
+            <div className="forgot-pass">
+              <Link to="/reset">Forgot your password?</Link>
+            </div>
+            <button className="btn" type="submit">
+              Login
+            </button>
+            <button
+              type="button"
+              className="btn google"
+              onClick={handleGoogleLogin}
+            >
+              <img
+                src="https://www.svgrepo.com/show/475656/google-color.svg"
+                alt="Google"
+                className="icon"
+              />
+              Continue with Google
+            </button>
+            <div className="signup-link">
+              <Link to="/register">Sign Up</Link>
+            </div>
+          </form>
         </div>
 
-        {/* Animated Password Input */}
-        <div className="mb-6">
-          <div className="form-control">
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label>
-              {"Password".split("").map((char, i) => (
-                <span key={i} style={{ transitionDelay: `${i * 50}ms` }}>
-                  {char}
-                </span>
-              ))}
-            </label>
-          </div>
-        </div>
-
-        {/* Login Button */}
-        <button type="submit" className="btn btn-primary w-full mb-4">
-          Login
-        </button>
-
-        {/* Google Login */}
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="btn btn-outline w-full mb-6 flex items-center justify-center gap-2"
-        >
-          <img
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
-            className="w-5 h-5"
-          />
-          Continue with Google
-        </button>
-
-        {/* Register Link */}
-        <p className="text-center text-sm text-gray-500">
-          Don't have an account?{" "}
-          <Link
-            to="/register"
-            className="text-primary font-medium hover:underline"
-          >
-            Register here
-          </Link>
-        </p>
-      </form>
+        {/* Glowing ring animation */}
+        {[...Array(50)].map((_, i) => (
+          <span key={i} style={{ "--i": i }} />
+        ))}
+      </div>
     </StyledWrapper>
   );
 };
 
 export default Login;
 
-// !style UIvers vuleo delete koro na
 const StyledWrapper = styled.div`
-  .form-control {
-    position: relative;
-    margin: 20px 0 40px;
-    width: 100%;
+  background: #1f293a;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.container span {
+  position: absolute;
+  left: 0;
+  width: 36px;
+  height: 6px;
+  background: #2c4766;
+  border-radius: 80px;
+  transform-origin: 250px;
+  transform: rotate(calc(var(--i) * (360deg / 50)));
+  animation: blink 3s linear infinite;
+  animation-delay: calc(var(--i) * (3s / 50));
+}
+
+  @keyframes blink {
+    0% {
+      background: #0ef;
+    }
+    25% {
+      background: #2c4766;
+    }
   }
 
-  .form-control input {
-    background-color: transparent;
-    border: 0;
-    border-bottom: 2px #ccc solid;
-    display: block;
-    width: 100%;
-    padding: 15px 0;
-    font-size: 18px;
-    color: #333;
-  }
-
-  .form-control input:focus,
-  .form-control input:valid {
-    outline: 0;
-    border-bottom-color: #3b82f6;
-  }
-
-  .form-control label {
+  .login-box {
     position: absolute;
-    top: 15px;
-    left: 0;
+    width: 80%;
+    max-width: 300px;
+    z-index: 1;
+    padding: 20px;
+    border-radius: 20px;
+    background: #1f293a;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    color: #0ef;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  form {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .input-box {
+    position: relative;
+    margin: 15px 0;
+  }
+
+  input {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #2c4766;
+    outline: none;
+    border-radius: 40px;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 15px;
+    transition: 0.5s ease;
+  }
+
+  input:focus {
+    border-color: #0ef;
+  }
+
+  input[value]:not([value=""]) ~ label,
+  input:focus ~ label {
+    top: -10px;
+    font-size: 0.8em;
+    background: #1f293a;
+    padding: 0 6px;
+    color: #0ef;
+  }
+
+  label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1em;
     pointer-events: none;
+    transition: 0.5s ease;
+    color: #fff;
   }
 
-  .form-control label span {
-    display: inline-block;
-    font-size: 18px;
-    min-width: 5px;
-    color: #999;
-    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  .forgot-pass {
+    margin: -10px 0 10px;
+    text-align: center;
   }
 
-  .form-control input:focus + label span,
-  .form-control input:valid + label span {
-    color: #3b82f6;
-    transform: translateY(-30px);
+  .forgot-pass a {
+    font-size: 0.85em;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .btn {
+    width: 100%;
+    height: 45px;
+    background: #0ef;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #1f293a;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .btn.google {
+    background: #fff;
+    color: #1f293a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .signup-link {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .signup-link a {
+    font-size: 1em;
+    color: #0ef;
+    text-decoration: none;
+    font-weight: 600;
   }
 `;

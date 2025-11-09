@@ -22,7 +22,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm px-4">
+      <div className="navbar rounded-2xl bg-sky-100 shadow-lg mb-2 px-4">
         {/* Start: Logo + Mobile Dropdown */}
         <div className="navbar-start">
           <div className="dropdown lg:hidden">
@@ -65,7 +65,7 @@ const NavBar = () => {
             </ul>
           </div>
 
-          <Link to="/" className=" text-xl text-primary font-bold">
+          <Link to="/" className=" text-2xl  text-green-700 font-bold">
             HabitTracker
           </Link>
         </div>
