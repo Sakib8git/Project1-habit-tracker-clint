@@ -18,6 +18,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: () => fetch("http://localhost:3000/fetured"),
       },
       {
         path: "add-habit",
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
       {
         path: "browse",
         Component: BrowseHabits,
+        loader: () => fetch("http://localhost:3000/habits"),
       },
       {
         path: "login",
@@ -48,7 +50,7 @@ export const router = createBrowserRouter([
         Component: Register,
       },
       {
-        path: "habits/:id", // ✅ NEW ROUTE ADDED
+        path: "habits/:id",
         element: (
           <PrivateRoute>
             <HabitDetails />
