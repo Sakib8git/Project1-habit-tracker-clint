@@ -15,6 +15,9 @@ const Home = () => {
         <HeroSlider></HeroSlider>
       </div>
       <div>
+        <h2 className="text-3xl font-bold text-center text-gray-800 pt-20 ">
+        Featured Habits
+      </h2>
         <HabbitCard habits={data} ></HabbitCard>
       </div>
       <div>

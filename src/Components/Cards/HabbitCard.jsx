@@ -11,9 +11,7 @@ const HabbitCard = ({ habits }) => {
 
   return (
     <section className="py-12 px-6">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
-        Featured Habits
-      </h2>
+      
       <div className="flex flex-wrap justify-center gap-8">
         {habits.map((habit, index) => (
           <div
