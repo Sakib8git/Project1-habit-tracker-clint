@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Spinner from "../../Components/Spinner/Spinner";
 import AnimatedBackground from "../../Components/AnimatedBackground/AnimatedBackground";
 import { AuthContext } from "../../AuthContext/AuthContext";
+import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const MyHabits = () => {
   const { user } = useContext(AuthContext);
@@ -22,6 +24,35 @@ const MyHabits = () => {
         setLoading(false);
       });
   }, [user?.email]);
+
+  // delete kora holo
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This habit will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/habits/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              Swal.fire("Deleted!", "Your habit has been removed.", "success");
+              setHabits((prev) => prev.filter((h) => h._id !== id));
+            }
+          })
+          .catch((err) => {
+            console.error("❌ Failed to delete habit:", err);
+          });
+      }
+    });
+  };
 
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
@@ -57,12 +88,19 @@ const MyHabits = () => {
                       {new Date(habit.createdAt).toLocaleDateString()}
                     </td>
                     <td className="py-3 px-4 text-center space-x-2">
-                      <button className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 rounded-full">
+                      <Link
+                        to={`/update-habit/${habit._id}`}
+                        className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 rounded-full"
+                      >
                         Update
-                      </button>
-                      <button className="btn btn-sm bg-red-500 text-white hover:bg-red-600 rounded-full">
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(habit._id)}
+                        className="btn btn-sm bg-red-500 text-white hover:bg-red-600 rounded-full"
+                      >
                         Delete
                       </button>
+
                       <button className="btn btn-sm bg-green-500 text-white hover:bg-green-600 rounded-full">
                         Mark Complete
                       </button>

@@ -88,16 +88,17 @@ const HabitDetails = () => {
         {/* Progress */}
         <div className="mb-4 text-left">
           <label className="text-sm font-medium text-gray-600">
-            Progress (Last 30 Days)
+            Progress: {completedDays}/30 days completed
           </label>
           <div className="habit-progress-bar">
+            {/* % er opor base kore barabe */}
             <div
               className="habit-progress-fill"
               style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
           <p className="text-sm text-gray-500 mt-1">
-            {completedDays}/30 days completed
+            (Last 30 Days)
           </p>
         </div>
 

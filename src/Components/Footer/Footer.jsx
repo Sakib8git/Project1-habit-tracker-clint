@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Logo + Website Name */}
         <div>
           <h2 className="text-2xl font-bold text-green-700 mb-2">
-            Habit Tracker
+            Habit-Tracker
           </h2>
           <p className="text-sm text-gray-600">
             Helping you build better habits with the right tools and support.

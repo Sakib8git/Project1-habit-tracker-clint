@@ -143,7 +143,7 @@ const AddHabit = () => {
 
                 {/* Image URL */}
                 <div>
-                  <label className="label font-medium">Image URL (optional)</label>
+                  <label className="label font-medium">Image URL</label>
                   <input
                     type="url"
                     name="imageURL"

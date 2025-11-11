@@ -66,7 +66,7 @@ const NavBar = () => {
           </div>
 
           <Link to="/" className=" text-2xl  text-green-700 font-bold">
-            HabitTracker
+            Habit-Tracker
           </Link>
         </div>
 
