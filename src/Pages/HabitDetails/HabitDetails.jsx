@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import Spinner from "../../Components/Spinner/Spinner";
 import { useParams } from "react-router";
+import "../../App.css"; // ✅ Import styles
 
 const HabitDetails = () => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ const HabitDetails = () => {
           const today = new Date().toISOString();
           setHabit((prev) => ({
             ...prev,
-            completionHistory: [...prev.completionHistory, today],
+            completionHistory: [...(prev.completionHistory || []), today],
             currentStreak: prev.currentStreak + 1,
             updatedAt: today,
           }));
@@ -50,21 +50,35 @@ const HabitDetails = () => {
 
   if (loading || !habit)
     return (
-      <Content>
+      <div className="habit-content">
         <Spinner />
-      </Content>
+      </div>
     );
 
-  const { title, description, imageURL, category, currentStreak, completionHistory, user, createdAt } = habit;
+  const {
+    title,
+    description,
+    imageURL,
+    category,
+    currentStreak,
+    completionHistory,
+    user,
+    createdAt,
+  } = habit;
+
   const completedDays = completionHistory?.length || 0;
   const progressPercent = Math.min((completedDays / 30) * 100, 100).toFixed(0);
   const today = new Date().toISOString().split("T")[0];
   const alreadyMarked = completionHistory?.some((d) => d.startsWith(today));
 
   return (
-    <Content>
-      <Card>
-        <Image src={imageURL || "https://source.unsplash.com/400x200/?habit,focus"} alt="Habit" />
+    <div className="habit-content">
+      <div className="habit-card">
+        <img
+          src={imageURL || "https://source.unsplash.com/400x200/?habit,focus"}
+          alt="Habit"
+          className="habit-image"
+        />
         <h2 className="text-2xl font-bold mb-2">{title}</h2>
         <span className="text-sm bg-purple-600 text-white px-3 py-1 rounded-full mb-4 inline-block">
           {category}
@@ -73,10 +87,15 @@ const HabitDetails = () => {
 
         {/* Progress */}
         <div className="mb-4 text-left">
-          <label className="text-sm font-medium text-gray-600">Progress (Last 30 Days)</label>
-          <ProgressBar>
-            <ProgressFill style={{ width: `${progressPercent}%` }} />
-          </ProgressBar>
+          <label className="text-sm font-medium text-gray-600">
+            Progress (Last 30 Days)
+          </label>
+          <div className="habit-progress-bar">
+            <div
+              className="habit-progress-fill"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
           <p className="text-sm text-gray-500 mt-1">
             {completedDays}/30 days completed
           </p>
@@ -84,7 +103,9 @@ const HabitDetails = () => {
 
         {/* Streak Badge */}
         <div className="mb-4">
-          <StreakBadge>🔥 {currentStreak}-Day Streak</StreakBadge>
+          <div className="habit-streak-badge">
+            🔥 {currentStreak}-Day Streak
+          </div>
         </div>
 
         {/* Creator Info */}
@@ -110,57 +131,15 @@ const HabitDetails = () => {
           onClick={handleMarkComplete}
           disabled={alreadyMarked || marking}
         >
-          {alreadyMarked ? "Already Marked Today" : marking ? "Marking..." : "Mark Today as Complete"}
+          {alreadyMarked
+            ? "Already Marked Today"
+            : marking
+            ? "Marking..."
+            : "Mark Today as Complete"}
         </button>
-      </Card>
-    </Content>
+      </div>
+    </div>
   );
 };
 
 export default HabitDetails;
-
-const Content = styled.div`
-  padding: 2rem;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-`;
-
-const Card = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  text-align: center;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-`;
-
-const ProgressBar = styled.div`
-  height: 10px;
-  background: #e5e7eb;
-  border-radius: 6px;
-  overflow: hidden;
-`;
-
-const ProgressFill = styled.div`
-  height: 100%;
-  background: #9333ea;
-  transition: width 0.3s ease;
-`;
-
-const StreakBadge = styled.div`
-  display: inline-block;
-  background: #facc15;
-  color: #92400e;
-  font-weight: 600;
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.875rem;
-`;
