@@ -84,7 +84,7 @@ const UpdateHabit = () => {
       <title> Habit-Tracker: Update-Habit</title>
       <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
       <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-2xl">
-        <h2 className="text-3xl font-bold text-center text-purple-700 mb-8">
+        <h2 className="text-3xl font-bold text-center text-green-700 mb-8">
           ✏️ Update Habit
         </h2>
 
@@ -165,7 +165,7 @@ const UpdateHabit = () => {
 
           <button
             type="submit"
-            className="btn bg-purple-600 hover:bg-purple-700 text-white w-full mt-6"
+            className="w-full bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg transition-all"
           >
             ✏️ Update Habit
           </button>

@@ -177,7 +177,7 @@ const AddHabit = () => {
 
                 <button
                   type="submit"
-                  className="btn w-full text-white mt-6 rounded-full bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800"
+                  className="w-full bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg transition-all"
                 >
                   Add Habit
                 </button>

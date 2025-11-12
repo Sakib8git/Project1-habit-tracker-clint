@@ -107,7 +107,7 @@ const MyHabits = () => {
       <title> Habit-Tracker: My-Habits</title>
       <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+        <h2 className="text-3xl font-bold text-center text-black mb-8">
           My Habits
         </h2>
 

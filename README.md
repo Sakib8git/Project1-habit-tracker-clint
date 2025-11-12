@@ -1,84 +1,26 @@
-import React, { useState, useEffect } from "react";
-import slide2 from "../../assets/2.png";
-import slide3 from "../../assets/3.png";
-import slide4 from "../../assets/4.png";
+## 🧠 HabitTracker
 
-const slides = [
-  {
-    id: 1,
-    title: "Track Your Habits Effortlessly",
-    subtitle: "Build consistency with daily goals and visual progress.",
-    image: slide2,
-  },
-  {
-    id: 2,
-    title: "Stay Motivated Every Day",
-    subtitle: "Get reminders, streaks, and rewards for staying on track.",
-    image: slide3,
-  },
-  {
-    id: 3,
-    title: "Your Personal Habit Dashboard",
-    subtitle: "Customize your routine and monitor growth over time.",
-    image: slide4,
-  },
-];
+**Live Site:** [Live site main](https://habit-tracket.netlify.app/)
+**Live Site:** [Live site BackUp](https://habit-tracker-d2m.pages.dev/)
 
-const HeroSlider = () => {
-  const [current, setCurrent] = useState(0);
-  console.log("slide2:", slide2);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+Helping you build better habits with the right tools and support.
+Create, track, and manage daily habits to build streaks and boost productivity.
 
-  return (
-    <div className="relative w-full h-[60vh] overflow-hidden rounded-3xl shadow-2xl">
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
-          <div style={{ height: "300px", border: "2px solid red" }}>
-            <img
-              src={slide2}
-              alt="Test"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          </div>
+---
 
-          {/* <img
-            src={slide.image}
-            alt={slide.title}
-            className="w-full h-full object-cover"
-          /> */}
-          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {slide.title}
-            </h1>
-            <p className="text-lg md:text-xl text-gray-200">{slide.subtitle}</p>
-          </div>
-        </div>
-      ))}
+### Features
 
-      {/* Manual navigation */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`w-3 h-3 rounded-full ${
-              i === current ? "bg-white" : "bg-gray-400"
-            }`}
-          ></button>
-        ))}
-      </div>
-    </div>
-  );
-};
+- **User Authentication**: Secure login and registration using email/password and Google OAuth.
+- **Daily Habit Completion**: Mark habits as complete each day and build streaks with visual feedback.
+- **Progress Visualization**: Dynamic progress bars and streak badges to motivate consistent behavior.
+- **Habit Management**: Create, update, and delete habits with category tagging and image support.
+- **User-Specific Data Filtering**: Only the logged-in user's habits are shown, ensuring privacy and personalization.
 
-export default HeroSlider;
+---
+
+### Tech Stack
+
+- **Frontend**: React, TailwindCSS, Styled Components, React Router,Lottie React,Framer Motion,
+- **Backend**: Express.js, MongoDB, CORS
+- **Auth**: Firebase Authentication
+- **Hosting**:Vercel (Server), Netlify (Client), Cloudflare(BackUp clint)
