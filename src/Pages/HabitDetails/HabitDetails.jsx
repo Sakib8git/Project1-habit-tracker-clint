@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Spinner from "../../Components/Spinner/Spinner";
 import { useParams } from "react-router";
-import "../../App.css"; // ✅ Import styles
+import "../../App.css";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const HabitDetails = () => {
+  const { user } = use(AuthContext);
+
   const { id } = useParams();
   const [habit, setHabit] = useState(null);
   const [loading, setLoading] = useState(true);
   const [marking, setMarking] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/habits/${id}`)
+    fetch(`http://localhost:3000/habits/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setHabit(data);
@@ -20,7 +27,7 @@ const HabitDetails = () => {
         console.error("❌ Failed to load habit:", err);
         setLoading(false);
       });
-  }, [id]);
+  }, [id, user]);
 
   const handleMarkComplete = () => {
     if (!habit) return;
@@ -62,7 +69,7 @@ const HabitDetails = () => {
     category,
     currentStreak,
     completionHistory,
-    user,
+
     createdAt,
   } = habit;
 
@@ -73,6 +80,7 @@ const HabitDetails = () => {
 
   return (
     <div className="habit-content">
+      <title>{title}</title>
       <div className="habit-card">
         <img
           src={imageURL || "https://source.unsplash.com/400x200/?habit,focus"}
@@ -97,9 +105,7 @@ const HabitDetails = () => {
               style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
-          <p className="text-sm text-gray-500 mt-1">
-            (Last 30 Days)
-          </p>
+          <p className="text-sm text-gray-500 mt-1">(Last 30 Days)</p>
         </div>
 
         {/* Streak Badge */}

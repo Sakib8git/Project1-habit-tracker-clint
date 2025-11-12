@@ -62,7 +62,8 @@ const AddHabit = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-10">
-      {/* Background Animation */}
+    <title> Habit-Tracker: Add-Habits</title>
+      {/* animation */}
       <AddAnimation
         src="https://lottie.host/25c6467c-9e17-4bf7-82ef-07cc13eb97e4/Tq3sxNL4yN.lottie"
         style={{
@@ -74,7 +75,7 @@ const AddHabit = () => {
         }}
       />
 
-      {/* Foreground Content */}
+     
       <div className="relative z-10 w-full max-w-xl">
         {loading ? (
           <Spinner />
@@ -85,7 +86,7 @@ const AddHabit = () => {
                 Add New Habit
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Habit Title */}
+                {/* habit titl */}
                 <div>
                   <label className="label font-medium">Habit Title</label>
                   <input
@@ -96,8 +97,8 @@ const AddHabit = () => {
                     placeholder="e.g. Morning Meditation"
                   />
                 </div>
-
-                {/* Description */}
+{/* ------------------------------------------------------------------- */}
+                {/* descrip */}
                 <div>
                   <label className="label font-medium">Description</label>
                   <textarea
@@ -108,8 +109,8 @@ const AddHabit = () => {
                     placeholder="Describe your habit..."
                   ></textarea>
                 </div>
-
-                {/* Category Dropdown */}
+{/* ------------------------------------------------------------------- */}
+                {/* cat dropdown */}
                 <div>
                   <label className="label font-medium">Category</label>
                   <select
@@ -129,8 +130,8 @@ const AddHabit = () => {
                     <option value="Study">Study</option>
                   </select>
                 </div>
-
-                {/* Reminder Time */}
+{/* ------------------------------------------------------------------- */}
+                {/*time */}
                 <div>
                   <label className="label font-medium">Reminder Time</label>
                   <input
@@ -151,7 +152,7 @@ const AddHabit = () => {
                     placeholder="https://i.ibb.co/your-image.png"
                   />
                 </div>
-
+{/* ------------------------------------------------------------------- */}
                 {/* User Info */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -173,8 +174,8 @@ const AddHabit = () => {
                     />
                   </div>
                 </div>
-
-                {/* Submit Button */}
+{/* ------------------------------------------------------------------- */}
+               
                 <button
                   type="submit"
                   className="btn w-full text-white mt-6 rounded-full bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800"

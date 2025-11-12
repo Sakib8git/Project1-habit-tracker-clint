@@ -9,7 +9,8 @@ import { ScrollFadeUp } from "../../Components/AnimatedBackground/ScrollFadeUp";
 const categories = ["All", "Morning", "Work", "Fitness", "Evening", "Study"];
 
 const BrowseHabits = () => {
-  const data = useLoaderData(); // 10 habit objects
+  const data = useLoaderData();
+  console.log(data);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -30,6 +31,7 @@ const BrowseHabits = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
+      <title> Habit-Tracker: Public Habits</title>
       <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
 
       <div className="relative z-10 px-6 py-12">
@@ -37,7 +39,7 @@ const BrowseHabits = () => {
           All Habits
         </h2>
 
-        {/* ✅ Search + Filter UI */}
+        {/*  Search kora*/}
         <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
           <input
             type="text"
@@ -46,7 +48,7 @@ const BrowseHabits = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-
+          {/* cate diye khojo */}
           <select
             className="select select-bordered w-full sm:w-1/3"
             value={selectedCategory}

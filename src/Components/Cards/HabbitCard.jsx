@@ -36,6 +36,13 @@ const HabbitCard = ({ habits }) => {
                 Creator: {habit.user?.name}
               </p>
             )}
+            {/* hbit stake */}
+            {habit.currentStreak > 0 && (
+              <span className="badge badge-success">
+                🔥 {habit.currentStreak} day streak
+              </span>
+            )}
+
             <button
               onClick={() => handleViewDetails(habit._id)}
               className="btnCus"

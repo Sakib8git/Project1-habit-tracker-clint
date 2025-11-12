@@ -28,6 +28,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
+      <title> Update Profile</title>
       <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-purple-700 mb-6">
           ✏️ Update Profile

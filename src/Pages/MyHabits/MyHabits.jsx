@@ -12,8 +12,12 @@ const MyHabits = () => {
 
   useEffect(() => {
     if (!user?.email) return;
-
-    fetch(`http://localhost:3000/my-habits?email=${user.email}`)
+    // email dhorlam----------then token nilam
+    fetch(`http://localhost:3000/my-habits?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setHabits(data);
@@ -23,7 +27,7 @@ const MyHabits = () => {
         console.error("❌ Failed to fetch habits:", error);
         setLoading(false);
       });
-  }, [user?.email]);
+  }, [user]);
 
   // delete kora holo
   const handleDelete = (id) => {
@@ -54,16 +58,47 @@ const MyHabits = () => {
     });
   };
 
-  //
-  const [completed, setCompleted] = useState(false);
+  const handleComplete = async (habitId) => {
+    try {
+      // habitId dhore / bakend er /complete e Patch kore data update korlam
+      const res = await fetch(
+        `http://localhost:3000/habits/${habitId}/complete`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userEmail: user.email }),
+        }
+      );
 
-  const handleClick = () => {
-    Swal.fire("✅ Completed!", "Habit marked as complete.", "success");
-    setCompleted(true);
+      const data = await res.json();
+      // agee up kora takle eida dekhabe---- vagooooooo
+      if (data.alreadyCompleted) {
+        Swal.fire(
+          "⛔ Already Completed",
+          "You’ve already completed this habit today.",
+          "info"
+        );
+        // na thakle kore dao
+      } else if (data.success) {
+        Swal.fire("✅ Completed!", "Habit marked as complete.", "success");
+        // updter korlo--------------------
+        setHabits((prev) =>
+          prev.map((h) =>
+            h._id === habitId ? { ...h, currentStreak: data.updatedStreak } : h
+          )
+        );
+      }
+    } catch (err) {
+      console.error("❌ Failed to complete habit:", err);
+      Swal.fire("Error", "Could not mark habit complete", "error");
+    }
   };
 
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
+      <title> Habit-Tracker: My-Habits</title>
       <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
@@ -110,7 +145,7 @@ const MyHabits = () => {
                       </button>
 
                       <button
-                        onClick={handleClick}
+                        onClick={() => handleComplete(habit._id)}
                         className="btn btn-sm bg-green-500 text-white hover:bg-green-600 rounded-full"
                       >
                         Mark Complete

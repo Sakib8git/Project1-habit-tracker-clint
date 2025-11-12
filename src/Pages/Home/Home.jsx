@@ -12,6 +12,7 @@ const Home = () => {
   const data = useLoaderData();
   return (
     <div>
+      <title> Habit-Tracker</title>
       <div>
         <HeroSlider></HeroSlider>
       </div>
@@ -21,24 +22,30 @@ const Home = () => {
         </h2>
         <ScrollFadeUp>
           <HabbitCard habits={data}></HabbitCard>
-          <div className="text-center mt-4">
-            {/* <Link
-              to="/browse"
-              className="btn btn-lg bg-green-500 text-white hover:bg-green-600 rounded-full px-4 py-2"
-            >
-              All Habits
-            </Link> */}
-          </div>
+        </ScrollFadeUp>
+        <div className="text-center mt-4">
+          <Link
+            to="/browse"
+            className="btn btn-lg  bg-green-500 text-white hover:bg-green-600 rounded-full px-4 py-2"
+          >
+            All Habits
+          </Link>
+        </div>
+      </div>
+      <div>
+        <ScrollFadeUp>
+          <WhyBuildHabits></WhyBuildHabits>
         </ScrollFadeUp>
       </div>
       <div>
-        <WhyBuildHabits></WhyBuildHabits>
+        <ScrollFadeUp>
+          <Feedback></Feedback>
+        </ScrollFadeUp>
       </div>
       <div>
-        <Feedback></Feedback>
-      </div>
-      <div>
-        <GoalTracker></GoalTracker>
+        <ScrollFadeUp>
+          <GoalTracker></GoalTracker>
+        </ScrollFadeUp>
       </div>
     </div>
   );

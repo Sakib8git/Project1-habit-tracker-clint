@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import Spinner from "../../Components/Spinner/Spinner";
-import { toast } from "react-toastify";
+
 import Swal from "sweetalert2";
 import AnimatedBackground from "../../Components/AnimatedBackground/AnimatedBackground";
+import { AuthContext } from "../../AuthContext/AuthContext";
 
 const UpdateHabit = () => {
+  const { user } = use(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const [habit, setHabit] = useState(null);
@@ -17,9 +19,13 @@ const UpdateHabit = () => {
     category: "",
     imageURL: "",
   });
-  // habite er id soho anlam
+  // habite er id soho anlam+ token dhore secure koraml
   useEffect(() => {
-    fetch(`http://localhost:3000/habits/${id}`)
+    fetch(`http://localhost:3000/habits/${id}`, {
+      headers: {
+        authorization: `Bearer ${user.accessToken}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setHabit(data);
@@ -35,7 +41,7 @@ const UpdateHabit = () => {
         console.error("❌ Eror:", err);
         setLoading(false);
       });
-  }, [id]);
+  }, [id, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +53,10 @@ const UpdateHabit = () => {
 
     fetch(`http://localhost:3000/habits/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+  "Content-Type": "application/json",
+  authorization: `Bearer ${user.accessToken}`,
+},
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
@@ -72,6 +81,7 @@ const UpdateHabit = () => {
 
   return (
     <div className="min-h-screen  px-4 py-12 flex items-center justify-center">
+      <title> Habit-Tracker: Update-Habit</title>
       <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
       <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-2xl">
         <h2 className="text-3xl font-bold text-center text-purple-700 mb-8">
@@ -135,7 +145,7 @@ const UpdateHabit = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Image URL 
+                Image URL
               </label>
               <input
                 type="text"
@@ -157,7 +167,7 @@ const UpdateHabit = () => {
             type="submit"
             className="btn bg-purple-600 hover:bg-purple-700 text-white w-full mt-6"
           >
-            ✅ Update Habit
+            ✏️ Update Habit
           </button>
         </form>
       </div>
