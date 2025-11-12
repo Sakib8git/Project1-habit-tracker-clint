@@ -20,7 +20,8 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/fetured"),
+        loader: () =>
+          fetch("https://habit-tracker-server-teal.vercel.app/fetured"),
       },
       {
         path: "add-habit",
@@ -49,7 +50,8 @@ export const router = createBrowserRouter([
       {
         path: "browse",
         Component: BrowseHabits,
-        loader: () => fetch("http://localhost:3000/habits"),
+        loader: () =>
+          fetch("https://habit-tracker-server-teal.vercel.app/habits"),
       },
       {
         path: "login",

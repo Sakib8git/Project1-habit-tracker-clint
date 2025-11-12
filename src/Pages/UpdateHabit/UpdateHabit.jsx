@@ -21,7 +21,7 @@ const UpdateHabit = () => {
   });
   // habite er id soho anlam+ token dhore secure koraml
   useEffect(() => {
-    fetch(`http://localhost:3000/habits/${id}`, {
+    fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -51,12 +51,12 @@ const UpdateHabit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:3000/habits/${id}`, {
+    fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
       method: "PATCH",
       headers: {
-  "Content-Type": "application/json",
-  authorization: `Bearer ${user.accessToken}`,
-},
+        "Content-Type": "application/json",
+        authorization: `Bearer ${user.accessToken}`,
+      },
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())

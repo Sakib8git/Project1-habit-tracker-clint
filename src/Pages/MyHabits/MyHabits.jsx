@@ -13,11 +13,14 @@ const MyHabits = () => {
   useEffect(() => {
     if (!user?.email) return;
     // email dhorlam----------then token nilam
-    fetch(`http://localhost:3000/my-habits?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    fetch(
+      `https://habit-tracker-server-teal.vercel.app/my-habits?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setHabits(data);
@@ -41,7 +44,7 @@ const MyHabits = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/habits/${id}`, {
+        fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -62,7 +65,7 @@ const MyHabits = () => {
     try {
       // habitId dhore / bakend er /complete e Patch kore data update korlam
       const res = await fetch(
-        `http://localhost:3000/habits/${habitId}/complete`,
+        `https://habit-tracker-server-teal.vercel.app/habits/${habitId}/complete`,
         {
           method: "PATCH",
           headers: {

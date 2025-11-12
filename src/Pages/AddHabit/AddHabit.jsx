@@ -37,7 +37,7 @@ const AddHabit = () => {
       updatedAt: new Date().toISOString(),
     };
 
-    fetch("http://localhost:3000/habits", {
+    fetch("https://habit-tracker-server-teal.vercel.app/habits", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const AddHabit = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-10">
-    <title> Habit-Tracker: Add-Habits</title>
+      <title> Habit-Tracker: Add-Habits</title>
       {/* animation */}
       <AddAnimation
         src="https://lottie.host/25c6467c-9e17-4bf7-82ef-07cc13eb97e4/Tq3sxNL4yN.lottie"
@@ -75,7 +75,6 @@ const AddHabit = () => {
         }}
       />
 
-     
       <div className="relative z-10 w-full max-w-xl">
         {loading ? (
           <Spinner />
@@ -97,7 +96,7 @@ const AddHabit = () => {
                     placeholder="e.g. Morning Meditation"
                   />
                 </div>
-{/* ------------------------------------------------------------------- */}
+                {/* ------------------------------------------------------------------- */}
                 {/* descrip */}
                 <div>
                   <label className="label font-medium">Description</label>
@@ -109,7 +108,7 @@ const AddHabit = () => {
                     placeholder="Describe your habit..."
                   ></textarea>
                 </div>
-{/* ------------------------------------------------------------------- */}
+                {/* ------------------------------------------------------------------- */}
                 {/* cat dropdown */}
                 <div>
                   <label className="label font-medium">Category</label>
@@ -130,7 +129,7 @@ const AddHabit = () => {
                     <option value="Study">Study</option>
                   </select>
                 </div>
-{/* ------------------------------------------------------------------- */}
+                {/* ------------------------------------------------------------------- */}
                 {/*time */}
                 <div>
                   <label className="label font-medium">Reminder Time</label>
@@ -152,7 +151,7 @@ const AddHabit = () => {
                     placeholder="https://i.ibb.co/your-image.png"
                   />
                 </div>
-{/* ------------------------------------------------------------------- */}
+                {/* ------------------------------------------------------------------- */}
                 {/* User Info */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -174,8 +173,8 @@ const AddHabit = () => {
                     />
                   </div>
                 </div>
-{/* ------------------------------------------------------------------- */}
-               
+                {/* ------------------------------------------------------------------- */}
+
                 <button
                   type="submit"
                   className="btn w-full text-white mt-6 rounded-full bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800"

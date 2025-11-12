@@ -13,7 +13,7 @@ const HabitDetails = () => {
   const [marking, setMarking] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/habits/${id}`, {
+    fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -33,9 +33,12 @@ const HabitDetails = () => {
     if (!habit) return;
     setMarking(true);
 
-    fetch(`http://localhost:3000/habits/${id}/complete`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://habit-tracker-server-teal.vercel.app/habits/${id}/complete`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
