@@ -1,28 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const feedbacks = [
-  {
-    id: 1,
-    name: "Ayesha",
-    mood: "🙂",
-    message: "This app helped me stay consistent with journaling. Love the clean UI!",
-  },
-  {
-    id: 2,
-    name: "Rafi",
-    mood: "😎",
-    message: "Tracking my water intake daily has become a fun habit now!",
-  },
-  {
-    id: 3,
-    name: "Tanvir",
-    mood: "😤",
-    message: "I struggled with sleep, but the reminders really helped me fix my routine.",
-  },
-];
-
 const TopFeedback = () => {
+  const [feedbacks, setFeedbacks] = useState([]);
+
+useEffect(() => {
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
+  const fetchFeedbacks = () => {
+    fetch(`${API_BASE}/feedback/recent`)
+      .then((res) => res.json())
+      .then((data) => setFeedbacks(data))
+      .catch((err) => console.error("Failed to load feedback:", err));
+  };
+
+  fetchFeedbacks(); 
+
+  const interval = setInterval(fetchFeedbacks, 8000); 
+
+  return () => clearInterval(interval); // cleanup
+}, []);
+
   return (
     <StyledWrapper>
       <section className="py-12 px-6 bg-sky-100">
@@ -32,9 +30,9 @@ const TopFeedback = () => {
 
         <div className="max-w-5xl mx-auto grid gap-6 md:grid-cols-3">
           {feedbacks.map((fb) => (
-            <div key={fb.id} className="card">
+            <div key={fb._id} className="card">
               <div className="text-3xl mb-2 z-10 relative">{fb.mood}</div>
-              <p className="text-gray-700 italic mb-4 z-10 relative">"{fb.message}"</p>
+              <p className="text-gray-700 italic mb-4 z-10 relative">"{fb.entry}"</p>
               <p className="text-sm text-gray-500 font-semibold text-right z-10 relative">
                 — {fb.name}
               </p>
@@ -47,7 +45,6 @@ const TopFeedback = () => {
 };
 
 export default TopFeedback;
-
 
 const StyledWrapper = styled.div`
   .card {

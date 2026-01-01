@@ -11,11 +11,13 @@ import NotFound from "../Components/404/NotFound";
 import HabitDetails from "../Pages/HabitDetails/HabitDetails"; // ✅ NEW IMPORT
 import UpdateHabit from "../Pages/UpdateHabit/UpdateHabit";
 import UpdateProfile from "../Pages/UpdateUser/UpdateProfile";
+import Spinner from "../Components/Spinner/Spinner";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    hydrateFallbackElement: <Spinner></Spinner>,
     children: [
       {
         index: true,

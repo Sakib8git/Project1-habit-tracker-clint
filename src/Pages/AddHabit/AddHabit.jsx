@@ -37,7 +37,9 @@ const AddHabit = () => {
       updatedAt: new Date().toISOString(),
     };
 
-    fetch("https://habit-tracker-server-teal.vercel.app/habits", {
+    const API_BASE = import.meta.env.VITE_API_BASE;
+
+    fetch(`${API_BASE}/habits`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +87,6 @@ const AddHabit = () => {
                 Add New Habit
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
-                
                 <div>
                   <label className="label font-medium">Habit Title</label>
                   <input

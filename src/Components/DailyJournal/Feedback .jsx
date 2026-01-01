@@ -1,17 +1,47 @@
 import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import Swal from "sweetalert2"; // ✅ SweetAlert2 import
 
 const Feedback = () => {
   const [entry, setEntry] = useState("");
   const [mood, setMood] = useState("🙂");
+  const [name, setName] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Feedback:", entry);
-    console.log("Mood:", mood);
-    setEntry("");
-    setMood("🙂");
-    toast.success("😊 We respect your valuable feedback");
+
+    const payload = { name, mood, entry };
+    const API_BASE = import.meta.env.VITE_API_BASE;
+
+    try {
+      const res = await fetch(`${API_BASE}/feedback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      console.log("Saved:", data);
+
+      setEntry("");
+      setMood("🙂");
+      setName("");
+
+      // ✅ SweetAlert success popup
+      Swal.fire({
+        icon: "success",
+        title: "Thank you!",
+        text: "🌸 Your feedback has been received with gratitude.",
+        confirmButtonColor: "#84cc16", // lime-500
+      });
+    } catch (err) {
+      // ✅ SweetAlert error popup
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "❌ Failed to send feedback. Please try again!",
+        confirmButtonColor: "#ef4444", // red-500
+      });
+    }
   };
 
   return (
@@ -24,6 +54,21 @@ const Feedback = () => {
         onSubmit={handleSubmit}
         className="max-w-xl mx-auto bg-gray-100 p-6 rounded-xl shadow-md"
       >
+        {/* Name Field */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-semibold mb-2">
+            Your Name
+          </label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter your name"
+            className="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            required
+          />
+        </div>
+
         {/* Mood Selector */}
         <div className="mb-4">
           <label className="block text-gray-700 font-semibold mb-2">
@@ -64,7 +109,6 @@ const Feedback = () => {
           Send Your Feedback
         </button>
       </form>
-      <ToastContainer></ToastContainer>
     </section>
   );
 };
