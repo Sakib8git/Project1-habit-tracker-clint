@@ -42,7 +42,7 @@ const WhyBuildHabits = () => {
 
 const StyledWrapper = styled.div`
   padding: 3rem 1rem;
-  background: #DFF2FE;
+  // background: #DFF2FE;
   text-align: center;
 
   .section-title {

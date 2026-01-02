@@ -30,7 +30,7 @@ const BrowseHabits = () => {
   });
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden container mx-auto">
       <title> Habit-Tracker: Public Habits</title>
       <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
 

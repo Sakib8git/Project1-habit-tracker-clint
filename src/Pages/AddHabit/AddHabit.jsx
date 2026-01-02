@@ -63,7 +63,7 @@ const AddHabit = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-10">
+    <div className=" relative min-h-screen overflow-hidden flex items-center justify-center px-4 py-10">
       <title> Habit-Tracker: Add-Habits</title>
       {/* anim */}
       <AddAnimation
@@ -77,7 +77,7 @@ const AddHabit = () => {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-xl">
+      <div className="relative z-10 w-full max-w-xl ">
         {loading ? (
           <Spinner />
         ) : (
