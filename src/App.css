@@ -99,7 +99,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: rgb(224, 242, 254);
+  /* background: rgb(224, 242, 254); */
 }
 
 /* Card form */
@@ -108,17 +108,17 @@
   max-width: 420px;
   padding: 2rem;
   border-radius: 12px;
-  background: rgba(26, 26, 26, 0.794);
-  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+  background: rgba(226, 253, 255, 0.46);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.151);
   backdrop-filter: blur(6px);
-  color: #e6eef8;
+  color: #f8e6e6;
 }
 
 .register-card h2 {
   text-align: center;
   margin-bottom: 1.25rem;
   font-size: 1.25rem;
-  color: #bfe3c0;
+  color: #252625;
 }
 
 .register-card .g-icon {
@@ -144,7 +144,7 @@
 
 .register-card .outline {
   background: rgba(255, 255, 255, 0.04);
-  color: #e6eef8;
+  color: #1d1d1d;
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
@@ -155,7 +155,7 @@
 .register-card .muted {
   text-align: center;
   margin-top: 0.9rem;
-  color: #9fb1c8;
+  color: #121212;
 }
 
 /* Field */
@@ -163,6 +163,7 @@
   position: relative;
   margin: 18px 0 28px;
   width: 100%;
+
 }
 
 .field input {
@@ -171,15 +172,16 @@
   border-bottom: 2px rgba(255, 255, 255, 0.18);
   display: block;
   width: 100%;
-  padding: 14px 0;
+  padding: 14px 5px;
   font-size: 16px;
-  color: #eaf6ff;
+  color: #000000;
+  
 }
 
 .field input:focus,
 .field input:valid {
   outline: 0;
-  border-bottom-color: #7dd3fc;
+  border-bottom-color: #fc7d7d;
 }
 
 .field label {
@@ -187,19 +189,21 @@
   top: 14px;
   left: 0;
   pointer-events: none;
+ 
 }
 
 .field label span {
+  
   display: inline-block;
   font-size: 16px;
   min-width: 6px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(4, 4, 4, 0.65);
   transition: transform 0.32s cubic-bezier(0.68, -0.55, 0.265, 1.55), color 0.2s;
 }
 
 .field input:focus + label span,
 .field input:valid + label span {
-  color: #7dd3fc;
-  transform: translateY(-30px);
+  color: #010101;
+  transform: translateY(-35px);
 }
 

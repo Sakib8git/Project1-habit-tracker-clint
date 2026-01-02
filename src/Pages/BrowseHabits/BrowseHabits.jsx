@@ -14,11 +14,30 @@ const BrowseHabits = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [habits, setHabits] = useState([]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setLoading(false), 1500);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
+    setLoading(true);
+    fetch(
+      `https://habit-tracker-server-teal.vercel.app/habits?page=${page}&limit=6`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setHabits(data.habits);
+        setTotalPages(Math.ceil(data.total / data.limit));
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("❌ Failed to fetch habits:", err);
+        setLoading(false);
+      });
+  }, [page]);
 
   const filteredHabits = data.filter((habit) => {
     const matchesCategory =
@@ -66,6 +85,7 @@ const BrowseHabits = () => {
           {loading ? <Spinner /> : <HabbitCard habits={filteredHabits} />}
         </ScrollFadeUp>
       </div>
+      
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // ✅ MUST HAVE
-
+import { FaPen, FaTrash, FaCheck } from "react-icons/fa";
 const MyHabits = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -116,9 +116,9 @@ const MyHabits = () => {
             <Spinner />
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="table w-full bg-white">
-              <thead className="bg-gray-100 text-gray-700 text-sm">
+          <div className="overflow-x-auto container mx-auto">
+            <table className="table w-full bg-base-100">
+              <thead className="bg-base-200   text-sm">
                 <tr>
                   <th className="py-3 px-4 text-left">Title</th>
                   <th className="py-3 px-4 text-left">Category</th>
@@ -141,13 +141,14 @@ const MyHabits = () => {
                         to={`/update-habit/${habit._id}`}
                         className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 rounded-full"
                       >
-                        Update
+                        <FaPen className="text-sm" />
+
                       </Link>
                       <button
                         onClick={() => handleDelete(habit._id)}
                         className="btn btn-sm bg-red-500 text-white hover:bg-red-600 rounded-full"
                       >
-                        Delete
+                       <FaTrash className="text-sm" />
                       </button>
 
                       <button
@@ -155,7 +156,8 @@ const MyHabits = () => {
                         // onClick={ handleComplete}
                         className="btn btn-sm bg-green-500 text-white hover:bg-green-600 rounded-full"
                       >
-                        Mark Complete
+                        <FaCheck className="text-sm" />
+
                       </button>
                     </td>
                   </tr>

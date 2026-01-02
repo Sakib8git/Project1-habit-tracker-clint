@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../AuthContext/AuthContext";
 import { FaUserEdit } from "react-icons/fa";
@@ -7,7 +7,21 @@ import Loader from "../Loader/Loader";
 import "../../App.css";
 
 const NavBar = () => {
-  const { user, logOut, loading   } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
+
+  // ✅ Load theme from localStorage (default = winter)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "winter";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme); // ✅ Save theme on change
+  }, [theme]);
+
+  const handleThemeToggle = (e) => {
+    setTheme(e.target.checked ? "forest" : "winter");
+  };
 
   const signOutUser = async () => {
     try {
@@ -19,58 +33,30 @@ const NavBar = () => {
   };
 
   return (
-    
-      <div className="navbar rounded-2xl  mb-2 px-4">
-        {/* Start: Logo + Mobile Dropdown */}
-        <div className="navbar-start">
-          <div className="dropdown lg:hidden z-50">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </label>
-            <ul
-              tabIndex={-1}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+    <div className="navbar rounded-2xl mb-2 px-4">
+      {/* Start: Logo + Mobile Dropdown */}
+      <div className="navbar-start">
+        <div className="dropdown lg:hidden z-50">
+          <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              {user && (
-                <>
-                  <li>
-                    <NavLink to="/add-habit">Add Habit</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/my-habits">My Habits</NavLink>
-                  </li>
-                </>
-              )}
-              <li>
-                <NavLink to="/browse">Browse Public Habits</NavLink>
-              </li>
-            </ul>
-          </div>
-
-          <Link to="/" className="text-3xl logo-font text-green-900 font-bold">
-            Habit-Tracker
-          </Link>
-        </div>
-
-        {/* Center: Desktop Menu */}
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-4 text-sm font-medium">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={-1}
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -87,27 +73,68 @@ const NavBar = () => {
             <li>
               <NavLink to="/browse">Browse Public Habits</NavLink>
             </li>
+
+            {/* ✅ Theme toggle inside mobile dropdown */}
+            <li>
+              <input
+                type="checkbox"
+                checked={theme === "forest"}
+                onChange={handleThemeToggle}
+                className="toggle theme-controller border-sky-400 bg-amber-300 
+                  [--tglbg:var(--color-sky-500)] 
+                  checked:border-blue-800 checked:bg-blue-300 
+                  checked:[--tglbg:var(--color-blue-900)]"
+              />
+            </li>
           </ul>
         </div>
 
-        {/* End: Auth Buttons or Avatar */}
-        <div className="navbar-end z-50">
-          {loading ? (
-            <Loader />
-          ) : !user ? (
-            <div className="flex gap-4">
-              <Link to="/login">
-                <button className="login-button">
-                  <span>Login</span>
-                </button>
-              </Link>
-              <Link to="/register">
-                <button className="login-button">
-                  <span>Signup</span>
-                </button>
-              </Link>
-            </div>
-          ) : (
+        <Link to="/" className="text-3xl logo-font text-green-900 font-bold">
+          Habit-Tracker
+        </Link>
+      </div>
+
+      {/* Center: Desktop Menu */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 gap-4 text-sm font-medium">
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          {user && (
+            <>
+              <li>
+                <NavLink to="/add-habit">Add Habit</NavLink>
+              </li>
+              <li>
+                <NavLink to="/my-habits">My Habits</NavLink>
+              </li>
+            </>
+          )}
+          <li>
+            <NavLink to="/browse">Browse Public Habits</NavLink>
+          </li>
+        </ul>
+      </div>
+
+      {/* End: Auth Buttons or Avatar */}
+      <div className="navbar-end z-50 flex items-center gap-3">
+        {loading ? (
+          <Loader />
+        ) : !user ? (
+          <div className="flex gap-4 items-center">
+            <Link to="/login">
+              <button className="login-button">
+                <span>Login</span>
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="login-button">
+                <span>Signup</span>
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <div className="flex items-center gap-3">
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -127,7 +154,7 @@ const NavBar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs mb-2">{user.email}</li>
@@ -150,10 +177,23 @@ const NavBar = () => {
                 </li>
               </ul>
             </div>
-          )}
-        </div>
+
+            {/* ✅ Theme toggle after User avatar (desktop only) */}
+            <div className="hidden lg:flex">
+              <input
+                type="checkbox"
+                checked={theme === "forest"}
+                onChange={handleThemeToggle}
+                className="toggle theme-controller border-sky-400 bg-amber-300 
+                  [--tglbg:var(--color-sky-500)] 
+                  checked:border-blue-800 checked:bg-blue-300 
+                  checked:[--tglbg:var(--color-blue-900)]"
+              />
+            </div>
+          </div>
+        )}
       </div>
-    
+    </div>
   );
 };
 

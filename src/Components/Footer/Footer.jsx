@@ -4,17 +4,17 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-800 py-12 px-6">
+    <footer className="bg-base-300  py-12 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo + Website Name */}
         <div>
           <h2 className="text-3xl font-bold logo-font text-green-900 mb-2">
             Habit-Tracker
           </h2>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-base-600">
             Helping you build better habits with the right tools and support.
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-base-600">
            Create, track, and manage daily habits to build streaks and boost productivity.
           </p>
         </div>

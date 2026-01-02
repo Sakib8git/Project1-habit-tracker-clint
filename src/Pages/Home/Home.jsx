@@ -18,7 +18,7 @@ const Home = () => {
       </div>
       <div className="container mx-auto">
         <div>
-          <h2 className="text-3xl font-bold text-center text-gray-800 pt-20 -pb-8 ">
+          <h2 className="text-3xl font-bold text-center  pt-20 -pb-8 ">
             Featured Habits
           </h2>
 

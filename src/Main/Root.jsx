@@ -7,7 +7,7 @@ import HeroSlider from "../Components/Banner/HeroSlider";
 const Root = () => {
   return (
     <div className="flex flex-col min-h-screen  text-base-content">
-      <div className="bg-sky-100 shadow-md mb-2 rounded-b-xl">
+      <div className=" shadow-md mb-2 rounded-b-xl sticky top-0 z-50 bg-base-100">
         <header className="container mx-auto  ">
           <NavBar></NavBar>
         </header>

@@ -12,7 +12,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(false); 
+  const [show, setShow] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -36,36 +36,37 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  py-20 px-3">
+    <div className="min-h-screen flex flex-col items-center justify-center py-20 px-3">
       <title>Login</title>
-      <div className="w-full max-w-md bg-gray-600 rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-center text-white mb-6">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h1 className="text-3xl font-bold text-center text-black mb-6">
           Login to <span className="text-green-600">Habit-Tracker</span>
         </h1>
 
+        {/* ✅ Login Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm mb-1 text-gray-300">Email</label>
+            <label className="block text-sm mb-1 text-black">Email</label>
             <input
               type="email"
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 rounded-md bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 rounded-md bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your email"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-1 text-gray-300">Password</label>
+            <label className="block text-sm mb-1 text-gray-800">Password</label>
             <div className="relative">
               <input
                 type={show ? "text" : "password"}
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 rounded-md bg-gray-900 text-white pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 rounded-md bg-gray-100 text-black pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your password"
                 required
               />
@@ -79,10 +80,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-between items-center text-sm">
-            <Link
-              to="/reset"
-              className="text-green-400 hover:text-blue-400"
-            >
+            <Link to="/reset" className="text-green-600 hover:text-blue-400">
               Forgot password?
             </Link>
           </div>
@@ -95,7 +93,7 @@ const Login = () => {
         <button
           type="button"
           onClick={handleGoogleLogin}
-          className="w-full flex items-center justify-center gap-2 py-2 bg-gray-700 hover:bg-gray-900 rounded-md text-white transition"
+          className="w-full flex items-center justify-center gap-2 py-2 bg-gray-100 hover:bg-gray-400 rounded-md text-black transition"
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -105,13 +103,26 @@ const Login = () => {
           Continue with Google
         </button>
 
-        <p className="text-sm text-center text-gray-300 mt-4">
+        <p className="text-sm text-center text-gray-900 mt-4">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-green-400 hover:text-blue-400">
+          <Link to="/register" className="text-blue-400">
             Register
           </Link>
         </p>
       </div>
+
+      {/* ✅ Autofill button card এর বাইরে নিচে */}
+      <button
+        type="button"
+        onClick={() => {
+          setEmail("saimon@user.com");
+          setPassword("Saimon@1122");
+        }}
+        className="w-full max-w-md mt-4 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition"
+      >
+        Autofill Demo Credentials
+      </button>
+
       <ToastContainer />
     </div>
   );

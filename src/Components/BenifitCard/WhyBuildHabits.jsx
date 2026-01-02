@@ -49,7 +49,7 @@ const StyledWrapper = styled.div`
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: #1f2937;
+    // color: #1f2937;
   }
 
   .cards {

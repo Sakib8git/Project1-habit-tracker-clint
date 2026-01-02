@@ -81,7 +81,7 @@ const AddHabit = () => {
         {loading ? (
           <Spinner />
         ) : (
-          <div className="card border border-gray-200 bg-base-100 shadow-2xl rounded-2xl">
+          <div className="card  bg-base-200 shadow-2xl rounded-2xl">
             <div className="card-body p-6">
               <h2 className="text-2xl font-bold text-center mb-6 text-green-700">
                 Add New Habit
