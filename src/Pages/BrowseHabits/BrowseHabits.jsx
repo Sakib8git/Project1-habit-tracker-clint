@@ -1,32 +1,24 @@
 import React, { useState, useEffect } from "react";
 import HabbitCard from "../../Components/Cards/HabbitCard";
 import Spinner from "../../Components/Spinner/Spinner";
-import { useLoaderData } from "react-router";
-import AnimatedBackground from "../../Components/AnimatedBackground/AnimatedBackground";
+import { useLoaderData } from "react-router"; // ✅ react-router-dom ব্যবহার করো
 import { ScrollFadeUp } from "../../Components/AnimatedBackground/ScrollFadeUp";
+
 // --------------------------------------------------
-// category Arry
+// category Array
 const categories = ["All", "Morning", "Work", "Fitness", "Evening", "Study"];
 
 const BrowseHabits = () => {
-  const data = useLoaderData();
-  console.log(data);
+  const data = useLoaderData(); // ✅ loader থেকে JSON আসবে
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [habits, setHabits] = useState([]);
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setLoading(false), 1500);
-  //   return () => clearTimeout(timer);
-  // }, []);
 
   useEffect(() => {
     setLoading(true);
-    // fetch(
-    //   `https://habit-tracker-server-teal.vercel.app/habits?page=${page}&limit=6`
-    // )
     const API_BASE = import.meta.env.VITE_API_BASE; // ✅ .env থেকে base URL নাও
 
     fetch(`${API_BASE}/habits?page=${page}&limit=6`)
@@ -42,7 +34,9 @@ const BrowseHabits = () => {
       });
   }, [page]);
 
-  const filteredHabits = data.filter((habit) => {
+  const sourceHabits = Array.isArray(data) ? data : habits;
+
+  const filteredHabits = sourceHabits.filter((habit) => {
     const matchesCategory =
       selectedCategory === "All" || habit.category === selectedCategory;
     const matchesSearch =
@@ -53,19 +47,15 @@ const BrowseHabits = () => {
 
   return (
     <div>
-      {/* <div >
-        <AnimatedBackground  src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
-      </div> */}
-
       <div className="relative min-h-screen overflow-hidden container mx-auto">
-        <title> Habit-Tracker: Public Habits</title>
+        <title>Habit-Tracker: Public Habits</title>
 
         <div className="relative z-10 px-6 py-12">
           <h2 className="text-3xl font-bold text-center text-base-800 mb-10">
             All Habits
           </h2>
 
-          {/*  Search kora*/}
+          {/* Search + Category */}
           <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
             <input
               type="text"
@@ -74,7 +64,6 @@ const BrowseHabits = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            {/* cate diye khojo */}
             <select
               className="select select-bordered w-full sm:w-1/3"
               value={selectedCategory}
@@ -91,6 +80,38 @@ const BrowseHabits = () => {
           <ScrollFadeUp>
             {loading ? <Spinner /> : <HabbitCard habits={filteredHabits} />}
           </ScrollFadeUp>
+
+          {/* ✅ Pagination */}
+          <div className="flex justify-center items-center gap-2 mt-8">
+            <button
+              className="btn btn-sm"
+              disabled={page === 1}
+              onClick={() => setPage((prev) => prev - 1)}
+            >
+              Prev
+            </button>
+
+            {/* Page numbers */}
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                className={`btn btn-sm ${
+                  page === i + 1 ? "btn-primary" : "btn-outline"
+                }`}
+                onClick={() => setPage(i + 1)}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              className="btn btn-sm"
+              disabled={page === totalPages}
+              onClick={() => setPage((prev) => prev + 1)}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

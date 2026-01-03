@@ -39,8 +39,13 @@ export const router = createBrowserRouter([
       {
         path: "browse",
         Component: BrowseHabits,
-        loader: () => fetch(`${API_BASE}/habits`),
+        loader: async () => {
+          const API_BASE = import.meta.env.VITE_API_BASE;
+          const res = await fetch(`${API_BASE}/habits`);
+          return res.json(); 
+        },
       },
+
       {
         path: "login",
         Component: Login,
