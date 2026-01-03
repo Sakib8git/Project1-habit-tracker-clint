@@ -22,7 +22,10 @@ const Profile = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    const API_URL = `https://habit-tracker-server-teal.vercel.app/my-habits?email=${user.email}`;
+    // const API_URL = `https://habit-tracker-server-teal.vercel.app/my-habits?email=${user.email}`;
+
+    const API_BASE = import.meta.env.VITE_API_BASE; // ✅ .env থেকে base URL নাও
+    const API_URL = `${API_BASE}/my-habits?email=${user.email}`;
 
     fetch(API_URL, {
       headers: {
@@ -55,13 +58,15 @@ const Profile = () => {
   }));
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-base-300 via-base to-base-100 px-4 py-8">
+    <div className="flex flex-col items-center min-h-screen  px-4 py-8">
       {/* Profile Card */}
       <div className="bg-base shadow-xl rounded-2xl p-8 w-full max-w-md relative overflow-hidden mb-8">
         {/* Avatar */}
         <div className="relative flex flex-col items-center">
           <img
-            src={user?.photoURL || "https://i.ibb.co/2FsfXqM/default-avatar.png"}
+            src={
+              user?.photoURL || "https://i.ibb.co/2FsfXqM/default-avatar.png"
+            }
             alt="User Avatar"
             className="w-28 h-28 rounded-full border-4 border-primary shadow-md"
           />

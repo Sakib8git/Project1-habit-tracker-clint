@@ -24,9 +24,12 @@ const BrowseHabits = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://habit-tracker-server-teal.vercel.app/habits?page=${page}&limit=6`
-    )
+    // fetch(
+    //   `https://habit-tracker-server-teal.vercel.app/habits?page=${page}&limit=6`
+    // )
+    const API_BASE = import.meta.env.VITE_API_BASE; // ✅ .env থেকে base URL নাও
+
+    fetch(`${API_BASE}/habits?page=${page}&limit=6`)
       .then((res) => res.json())
       .then((data) => {
         setHabits(data.habits);
@@ -49,8 +52,8 @@ const BrowseHabits = () => {
   });
 
   return (
-      <div >
-    {/* <div >
+    <div>
+      {/* <div >
         <AnimatedBackground  src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
       </div> */}
 

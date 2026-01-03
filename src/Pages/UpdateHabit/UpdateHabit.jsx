@@ -21,7 +21,11 @@ const UpdateHabit = () => {
   });
   // habite er id soho anlam+ token dhore secure koraml
   useEffect(() => {
-    fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
+    const API_BASE = import.meta.env.VITE_API_BASE;
+
+    // fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`,
+
+    fetch(`${API_BASE}/habits/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
@@ -50,8 +54,9 @@ const UpdateHabit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
+    const API_BASE = import.meta.env.VITE_API_BASE;
+    // fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`,
+    fetch(`${API_BASE}/habits/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

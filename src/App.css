@@ -7,11 +7,12 @@
 }
 
 .habit-card {
-  background: white;
+  /* background: white; */
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
+  
 }
 
 .habit-image {
@@ -111,7 +112,7 @@
   background: rgba(226, 253, 255, 0.46);
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.151);
   backdrop-filter: blur(6px);
-  color: #f8e6e6;
+  /* color: #f8e6e6; */
 }
 
 .register-card h2 {
@@ -174,7 +175,7 @@
   width: 100%;
   padding: 14px 5px;
   font-size: 16px;
-  color: #000000;
+  /* color: #000000; */
   
 }
 
@@ -188,6 +189,7 @@
   position: absolute;
   top: 14px;
   left: 0;
+  padding-left: 12px;
   pointer-events: none;
  
 }
@@ -197,13 +199,14 @@
   display: inline-block;
   font-size: 16px;
   min-width: 6px;
-  color: rgba(4, 4, 4, 0.65);
+  
+  /* color: rgba(4, 4, 4, 0.65); */
   transition: transform 0.32s cubic-bezier(0.68, -0.55, 0.265, 1.55), color 0.2s;
 }
 
 .field input:focus + label span,
 .field input:valid + label span {
-  color: #010101;
+  /* color: #010101; */
   transform: translateY(-35px);
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink, Outlet } from "react-router"; // ✅ react-router-dom ব্যবহার করো
 import { FaPlus, FaList, FaUserEdit, FaUser, FaHome } from "react-icons/fa";
 import { GrDocumentUpdate } from "react-icons/gr";
@@ -7,6 +7,11 @@ import Loader from "../../Components/Loader/Loader";
 
 const Dashboard = () => {
   const { loading } = useContext(AuthContext);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "winter";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
 
   if (loading) {
     return (
@@ -56,8 +61,6 @@ const Dashboard = () => {
         >
           <FaList className="text-2xl" />
         </NavLink>
-
-        
 
         <NavLink
           to="profile"

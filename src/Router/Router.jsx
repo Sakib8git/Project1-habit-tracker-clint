@@ -14,6 +14,7 @@ import UpdateProfile from "../Pages/UpdateUser/UpdateProfile";
 import Spinner from "../Components/Spinner/Spinner";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Profile/profile";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export const router = createBrowserRouter([
   {
@@ -24,25 +25,9 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () =>
-          fetch("https://habit-tracker-server-teal.vercel.app/fetured"),
+        loader: () => fetch(`${API_BASE}/fetured`),
       },
-      // {
-      //   path: "add-habit",
-      //   element: (
-      //     <PrivateRoute>
-      //       <AddHabit></AddHabit>
-      //     </PrivateRoute>
-      //   ),
-      // },
-      // {
-      //   path: "my-habits",
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyHabits></MyHabits>
-      //     </PrivateRoute>
-      //   ),
-      // },
+
       {
         path: "update-habit/:id",
         element: (
@@ -54,8 +39,7 @@ export const router = createBrowserRouter([
       {
         path: "browse",
         Component: BrowseHabits,
-        loader: () =>
-          fetch("https://habit-tracker-server-teal.vercel.app/habits"),
+        loader: () => fetch(`${API_BASE}/habits`),
       },
       {
         path: "login",
@@ -85,64 +69,64 @@ export const router = createBrowserRouter([
     ],
   },
 
- {
-  path: "/dashboard",
-  element: (
-    <PrivateRoute>
-      <Dashboard />
-    </PrivateRoute>
-  ),
-  children: [
-    {
-      index: true, // ✅ default child route
-      element: (
-        <PrivateRoute>
-          <Profile />
-        </PrivateRoute>
-      ),
-    },
-    {
-      path: "add-habit",
-      element: (
-        <PrivateRoute>
-          <AddHabit />
-        </PrivateRoute>
-      ),
-    },
-    {
-      path: "my-habits",
-      element: (
-        <PrivateRoute>
-          <MyHabits />
-        </PrivateRoute>
-      ),
-    },
-    // {
-    //   path: "update-habit/:id",
-    //   element: (
-    //     <PrivateRoute>
-    //       <UpdateHabit />
-    //     </PrivateRoute>
-    //   ),
-    // },
-    {
-      path: "profile",
-      element: (
-        <PrivateRoute>
-          <Profile />
-        </PrivateRoute>
-      ),
-    },
-    {
-      path: "update-profile",
-      element: (
-        <PrivateRoute>
-          <UpdateProfile />
-        </PrivateRoute>
-      ),
-    },
-  ],
-},
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-habit",
+        element: (
+          <PrivateRoute>
+            <AddHabit />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-habits",
+        element: (
+          <PrivateRoute>
+            <MyHabits />
+          </PrivateRoute>
+        ),
+      },
+      // {
+      //   path: "update-habit/:id",
+      //   element: (
+      //     <PrivateRoute>
+      //       <UpdateHabit />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 
   {
     path: "/*",

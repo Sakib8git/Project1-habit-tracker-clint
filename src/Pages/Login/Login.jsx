@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../AuthContext/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link } from "react-router"; 
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import Button from "../../Custom Button/Button";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signInWithEmail, signInWithGoogle } = useContext(AuthContext);
@@ -18,20 +18,32 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmail(email, password);
-      toast.success("Login successful");
-      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "Login successful",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        navigate("/");
+      });
     } catch (err) {
-      toast.error(err.message);
+      Swal.fire("Error", err.message, "error");
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle();
-      toast.success("Google login successful");
-      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "Google login successful",
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        navigate("/");
+      });
     } catch (err) {
-      toast.error(err.message);
+      Swal.fire("Error", err.message, "error");
     }
   };
 
@@ -122,8 +134,6 @@ const Login = () => {
       >
         Autofill Demo Credentials
       </button>
-
-      <ToastContainer />
     </div>
   );
 };

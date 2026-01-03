@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router"; // ✅ react-router-dom ব্যবহার করো
+import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthContext/AuthContext";
 import "../../App.css";
 import Button from "../../Custom Button/Button";
@@ -35,7 +35,7 @@ const Register = () => {
     const { hasUpper, hasLower, hasMinLen, valid } = validatePassword(password);
 
     if (!name.trim()) {
-      toast.error("Name is required");
+      Swal.fire("Error", "Name is required", "error");
       return;
     }
 
@@ -44,7 +44,7 @@ const Register = () => {
       if (!hasUpper) msgs.push("an uppercase letter");
       if (!hasLower) msgs.push("a lowercase letter");
       if (!hasMinLen) msgs.push("at least 6 characters");
-      toast.error(`Password must contain ${msgs.join(", ")}`);
+      Swal.fire("Error", `Password must contain ${msgs.join(", ")}`, "error");
       return;
     }
 
@@ -53,7 +53,7 @@ const Register = () => {
         "createWithEmail is not available on AuthContext",
         createWithEmail
       );
-      toast.error("Registration service not available");
+      Swal.fire("Error", "Registration service not available", "error");
       return;
     }
 
@@ -61,14 +61,19 @@ const Register = () => {
     try {
       const res = await createWithEmail(email, password);
 
-      toast.success("✅ Registration successful! Please login to continue.");
+      Swal.fire({
+        icon: "success",
+        title: "✅ Registration successful! Please login to continue.",
+        showConfirmButton: false,
+        timer: 2000,
+      });
 
       if (typeof updateUserProfile === "function") {
         try {
           await updateUserProfile({ displayName: name, photoURL });
         } catch (updErr) {
           console.error("update profile error:", updErr);
-          toast.info("Registered but profile update failed");
+          Swal.fire("Info", "Registered but profile update failed", "info");
         }
       }
 
@@ -81,13 +86,13 @@ const Register = () => {
       console.error("register error:", err);
       const code = err?.code || "";
       if (code === "auth/email-already-in-use") {
-        toast.error("This email is already registered. Please login.");
+        Swal.fire("Error", "This email is already registered. Please login.", "error");
       } else if (code === "auth/weak-password") {
-        toast.error("Password should be at least 6 characters.");
+        Swal.fire("Error", "Password should be at least 6 characters.", "error");
       } else if (code === "auth/invalid-email") {
-        toast.error("Please enter a valid email address.");
+        Swal.fire("Error", "Please enter a valid email address.", "error");
       } else {
-        toast.error(err?.message || "Registration failed. Try again.");
+        Swal.fire("Error", err?.message || "Registration failed. Try again.", "error");
       }
     } finally {
       setSubmitting(false);
@@ -96,25 +101,32 @@ const Register = () => {
 
   const handleGoogle = async () => {
     if (typeof signInWithGoogle !== "function") {
-      toast.error("Google sign-in not available");
+      Swal.fire("Error", "Google sign-in not available", "error");
       return;
     }
     try {
       await signInWithGoogle();
-      toast.success("Google signup successful");
+      Swal.fire({
+        icon: "success",
+        title: "Google signup successful",
+        showConfirmButton: false,
+        timer: 2000,
+      });
       navigate("/");
     } catch (err) {
       console.error("google signup error:", err);
-      toast.error(err?.message || "Google signup failed");
+      Swal.fire("Error", err?.message || "Google signup failed", "error");
     }
   };
 
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper ">
       <form className="register-card" onSubmit={handleRegister}>
-        <h2>Register to HabitTracker</h2>
+        <h1 className="text-3xl font-bold text-center text-base-800  mb-6">
+          Register to <span className="text-green-600">HabitTracker</span>
+        </h1>
 
-        <div className="field">
+        <div className="field border border-gray-300  px-3  rounded-2xl">
           <input
             name="name"
             type="text"
@@ -131,7 +143,7 @@ const Register = () => {
           </label>
         </div>
 
-        <div className="field">
+        <div className="field border border-gray-300 px-3 rounded-2xl">
           <input
             name="email"
             type="email"
@@ -148,7 +160,7 @@ const Register = () => {
           </label>
         </div>
 
-        <div className="field">
+        <div className="field border border-gray-300 px-3 rounded-2xl">
           <input
             name="password"
             type="password"
@@ -165,7 +177,7 @@ const Register = () => {
           </label>
         </div>
 
-        <div className="field">
+        <div className="field border border-gray-300 px-3 rounded-2xl">
           <input
             name="photoURL"
             type="text"
@@ -195,7 +207,10 @@ const Register = () => {
         </button>
 
         <p className="muted">
-          Already have an account? <Link className="text-blue-600" to="/login">Login here</Link>
+          Already have an account?{" "}
+          <Link className="text-blue-600" to="/login">
+            Login here
+          </Link>
         </p>
       </form>
     </div>

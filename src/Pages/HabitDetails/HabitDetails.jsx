@@ -14,10 +14,16 @@ const HabitDetails = () => {
   const [marking, setMarking] = useState(false);
 
   useEffect(() => {
-    fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
+    const API_BASE = import.meta.env.VITE_API_BASE;
+    fetch(`${API_BASE}/habits/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       },
+
+      // fetch(`https://habit-tracker-server-teal.vercel.app/habits/${id}`, {
+      //   headers: {
+      //     authorization: `Bearer ${user.accessToken}`,
+      //   },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -33,9 +39,14 @@ const HabitDetails = () => {
   const handleMarkComplete = () => {
     if (!habit) return;
     setMarking(true);
+    const API_BASE = import.meta.env.VITE_API_BASE;
+
+    // fetch(
+    //   `https://habit-tracker-server-teal.vercel.app/habits/${id}/complete`,
 
     fetch(
-      `https://habit-tracker-server-teal.vercel.app/habits/${id}/complete`,
+      `${API_BASE}/habits/${id}/complete`,
+
       {
         method: "PATCH",
         headers: {
@@ -88,22 +99,22 @@ const HabitDetails = () => {
   const alreadyMarked = completionHistory?.some((d) => d.startsWith(today));
 
   return (
-    <div className="habit-content">
+    <div className="habit-content  ">
       <title>{title}</title>
-      <div className="habit-card">
+      <div className="habit-card bg-base-200">
         <img
           src={imageURL || "https://source.unsplash.com/400x200/?habit,focus"}
           alt="Habit"
           className="habit-image"
         />
         <h2 className="text-2xl font-bold mb-2">{title}</h2>
-        <span className="text-sm bg-purple-600 text-white px-3 py-1 rounded-full mb-4 inline-block">
+        <span className="text-sm bg-green-600 text-white px-3 py-1 rounded-full mb-4 inline-block">
           {category}
         </span>
-        <p className="text-gray-700 mb-4">{description}</p>
+        <p className="text-base-700 mb-4">{description}</p>
 
         <div className="mb-4 text-left">
-          <label className="text-sm font-medium text-gray-600">
+          <label className="text-sm font-medium text-base-600">
             Progress: {completedDays}/30 days completed
           </label>
           <div className="habit-progress-bar">
@@ -112,7 +123,7 @@ const HabitDetails = () => {
               style={{ width: `${progressPercent}%` }}
             ></div>
           </div>
-          <p className="text-sm text-gray-500 mt-1">(Last 30 Days)</p>
+          <p className="text-sm text-base-500 mt-1">(Last 30 Days)</p>
         </div>
 
         {/* Streak */}
@@ -129,17 +140,17 @@ const HabitDetails = () => {
             className="w-10 h-10 rounded-full object-cover"
           />
           <div className="text-left">
-            <p className="text-sm font-semibold text-gray-800">
+            <p className="text-sm font-semibold text-base-800">
               Created by: {creator.name || "Unknown"}
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-base-400">
               Started on: {new Date(createdAt).toLocaleDateString()}
             </p>
           </div>
         </div>
 
         <button
-          className="btn bg-purple-600 text-white hover:bg-purple-700 w-full disabled:opacity-50"
+          className="btn bg-green-600 text-white hover:bg-green-700 w-full disabled:opacity-50"
           onClick={handleMarkComplete}
           disabled={alreadyMarked || marking}
         >
