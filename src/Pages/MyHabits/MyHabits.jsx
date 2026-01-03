@@ -105,9 +105,9 @@ const MyHabits = () => {
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-12">
       <title> Habit-Tracker: My-Habits</title>
-      <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
+      {/* <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" /> */}
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-black mb-8">
+        <h2 className="text-3xl font-bold text-center  mb-8">
           My Habits
         </h2>
 

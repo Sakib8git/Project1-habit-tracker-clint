@@ -43,14 +43,14 @@ export const router = createBrowserRouter([
       //     </PrivateRoute>
       //   ),
       // },
-      // {
-      //   path: "update-habit/:id",
-      //   element: (
-      //     <PrivateRoute>
-      //       <UpdateHabit />
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: "update-habit/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateHabit />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "browse",
         Component: BrowseHabits,
@@ -117,14 +117,14 @@ export const router = createBrowserRouter([
         </PrivateRoute>
       ),
     },
-    {
-      path: "update-habit/:id",
-      element: (
-        <PrivateRoute>
-          <UpdateHabit />
-        </PrivateRoute>
-      ),
-    },
+    // {
+    //   path: "update-habit/:id",
+    //   element: (
+    //     <PrivateRoute>
+    //       <UpdateHabit />
+    //     </PrivateRoute>
+    //   ),
+    // },
     {
       path: "profile",
       element: (

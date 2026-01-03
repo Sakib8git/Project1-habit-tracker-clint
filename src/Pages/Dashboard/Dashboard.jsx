@@ -57,17 +57,7 @@ const Dashboard = () => {
           <FaList className="text-2xl" />
         </NavLink>
 
-        <NavLink
-          to="update-habit/123"
-          className={({ isActive }) =>
-            `tooltip tooltip-right p-2 rounded-lg ${
-              isActive ? "bg-primary text-white" : "hover:text-primary"
-            }`
-          }
-          data-tip="Update Habit"
-        >
-          <GrDocumentUpdate className="text-2xl" />
-        </NavLink>
+        
 
         <NavLink
           to="profile"

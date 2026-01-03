@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2"; 
 import { AuthContext } from "../../AuthContext/AuthContext";
+import { useNavigate } from "react-router"; // ✅ useNavigate import
 
 import Spinner from "../../Components/Spinner/Spinner";
 import AddAnimation from "../../Components/AnimatedBackground/AddAnimation";
@@ -8,6 +9,7 @@ import AddAnimation from "../../Components/AnimatedBackground/AddAnimation";
 const AddHabit = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // ✅ navigate hook
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -48,16 +50,24 @@ const AddHabit = () => {
     })
       .then((res) => res.json())
       .then(() => {
-        toast.success("✅ Habit added successfully!", {
-          position: "top-center",
-          autoClose: 3000,
+        // ✅ Success alert
+        Swal.fire({
+          icon: "success",
+          title: "Habit added successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        }).then(() => {
+          // ✅ Navigate after alert closes
+          navigate("/dashboard/my-habits");
         });
         form.reset();
       })
       .catch(() => {
-        toast.error("❌ Failed to add habit", {
-          position: "top-center",
-          autoClose: 3000,
+        // ✅ Error alert
+        Swal.fire({
+          icon: "error",
+          title: "Failed to add habit",
+          text: "Please try again later.",
         });
       });
   };
@@ -87,6 +97,7 @@ const AddHabit = () => {
                 Add New Habit
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Habit Title */}
                 <div>
                   <label className="label font-medium">Habit Title</label>
                   <input
@@ -97,8 +108,8 @@ const AddHabit = () => {
                     placeholder="e.g. Morning Meditation"
                   />
                 </div>
-                {/* ------------------------------------------------------------------- */}
-                {/* descrip */}
+
+                {/* Description */}
                 <div>
                   <label className="label font-medium">Description</label>
                   <textarea
@@ -109,8 +120,8 @@ const AddHabit = () => {
                     placeholder="Describe your habit..."
                   ></textarea>
                 </div>
-                {/* ------------------------------------------------------------------- */}
-                {/* cat dropdown */}
+
+                {/* Category */}
                 <div>
                   <label className="label font-medium">Category</label>
                   <select
@@ -124,14 +135,14 @@ const AddHabit = () => {
                     </option>
                     <option value="Morning">Morning</option>
                     <option value="Work">Work</option>
-                    <option value="play">Play</option>
+                    <option value="Play">Play</option>
                     <option value="Fitness">Fitness</option>
                     <option value="Evening">Evening</option>
                     <option value="Study">Study</option>
                   </select>
                 </div>
-                {/* ------------------------------------------------------------------- */}
-                {/*time */}
+
+                {/* Reminder Time */}
                 <div>
                   <label className="label font-medium">Reminder Time</label>
                   <input
@@ -152,7 +163,7 @@ const AddHabit = () => {
                     placeholder="https://i.ibb.co/your-image.png"
                   />
                 </div>
-                {/* ------------------------------------------------------------------- */}
+
                 {/* User Info */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -174,7 +185,6 @@ const AddHabit = () => {
                     />
                   </div>
                 </div>
-                {/* ------------------------------------------------------------------- */}
 
                 <button
                   type="submit"
@@ -184,7 +194,6 @@ const AddHabit = () => {
                 </button>
               </form>
             </div>
-            <ToastContainer />
           </div>
         )}
       </div>

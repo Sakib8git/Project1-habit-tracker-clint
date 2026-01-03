@@ -70,7 +70,7 @@ const UpdateHabit = () => {
             timer: 1500,
           });
         }
-        navigate("/my-habits");
+        navigate("/dashboard/my-habits");
       })
       .catch((err) => {
         console.error("error to update :", err);
@@ -82,10 +82,10 @@ const UpdateHabit = () => {
   return (
     <div className="min-h-screen  px-4 py-12 flex items-center justify-center">
       <title> Habit-Tracker: Update-Habit</title>
-      <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
+      {/* <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" /> */}
       <div className="bg-base-300 rounded-xl shadow-xl p-8 w-full max-w-2xl">
         <h2 className="text-3xl font-bold text-center text-green-700 mb-8">
-          ✏️ Update Habit
+          Update Habit
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
