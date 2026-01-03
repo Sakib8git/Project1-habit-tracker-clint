@@ -15,7 +15,7 @@ const HabbitCard = ({ habits }) => {
         {habits.map((habit, index) => (
           <div
             key={index}
-            className={`m-2 group px-10 py-5 bg-base-100 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-lime-400 z-20 shadow-xl after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden cursor-pointer after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all w-80`}
+            className={`m-2 group px-10 py-5 bg-base-200 rounded-lg flex flex-col items-center justify-center gap-2 relative after:absolute after:h-full after:bg-lime-400 z-20 shadow-sm hover:shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden cursor-pointer after:-translate-y-full after:hover:translate-y-0 [&_p]:delay-200 [&_p]:transition-all w-80`}
           >
             <div
               className={`w-32 h-32 rounded-full bg-gradient-to-r from-lime-400 to-lime-600 p-2 transition-all duration-300 group-hover:-translate-y-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]`}

@@ -8,10 +8,12 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "../Main/PrivateRoute";
 import NotFound from "../Components/404/NotFound";
-import HabitDetails from "../Pages/HabitDetails/HabitDetails"; 
+import HabitDetails from "../Pages/HabitDetails/HabitDetails";
 import UpdateHabit from "../Pages/UpdateHabit/UpdateHabit";
 import UpdateProfile from "../Pages/UpdateUser/UpdateProfile";
 import Spinner from "../Components/Spinner/Spinner";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import Profile from "../Pages/Profile/profile";
 
 export const router = createBrowserRouter([
   {
@@ -25,30 +27,30 @@ export const router = createBrowserRouter([
         loader: () =>
           fetch("https://habit-tracker-server-teal.vercel.app/fetured"),
       },
-      {
-        path: "add-habit",
-        element: (
-          <PrivateRoute>
-            <AddHabit></AddHabit>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "my-habits",
-        element: (
-          <PrivateRoute>
-            <MyHabits></MyHabits>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "update-habit/:id",
-        element: (
-          <PrivateRoute>
-            <UpdateHabit />
-          </PrivateRoute>
-        ),
-      },
+      // {
+      //   path: "add-habit",
+      //   element: (
+      //     <PrivateRoute>
+      //       <AddHabit></AddHabit>
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "my-habits",
+      //   element: (
+      //     <PrivateRoute>
+      //       <MyHabits></MyHabits>
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "update-habit/:id",
+      //   element: (
+      //     <PrivateRoute>
+      //       <UpdateHabit />
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
         path: "browse",
         Component: BrowseHabits,
@@ -71,17 +73,77 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/update-profile",
+      // {
+      //   path: "/update-profile",
 
-        element: (
-          <PrivateRoute>
-            <UpdateProfile></UpdateProfile>
-          </PrivateRoute>
-        ),
-      },
+      //   element: (
+      //     <PrivateRoute>
+      //       <UpdateProfile></UpdateProfile>
+      //     </PrivateRoute>
+      //   ),
+      // },
     ],
   },
+
+ {
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <Dashboard />
+    </PrivateRoute>
+  ),
+  children: [
+    {
+      index: true, // ✅ default child route
+      element: (
+        <PrivateRoute>
+          <Profile />
+        </PrivateRoute>
+      ),
+    },
+    {
+      path: "add-habit",
+      element: (
+        <PrivateRoute>
+          <AddHabit />
+        </PrivateRoute>
+      ),
+    },
+    {
+      path: "my-habits",
+      element: (
+        <PrivateRoute>
+          <MyHabits />
+        </PrivateRoute>
+      ),
+    },
+    {
+      path: "update-habit/:id",
+      element: (
+        <PrivateRoute>
+          <UpdateHabit />
+        </PrivateRoute>
+      ),
+    },
+    {
+      path: "profile",
+      element: (
+        <PrivateRoute>
+          <Profile />
+        </PrivateRoute>
+      ),
+    },
+    {
+      path: "update-profile",
+      element: (
+        <PrivateRoute>
+          <UpdateProfile />
+        </PrivateRoute>
+      ),
+    },
+  ],
+},
+
   {
     path: "/*",
     Component: NotFound,

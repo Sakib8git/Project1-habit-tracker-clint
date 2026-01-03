@@ -49,43 +49,47 @@ const BrowseHabits = () => {
   });
 
   return (
-    <div className="relative min-h-screen overflow-hidden container mx-auto">
-      <title> Habit-Tracker: Public Habits</title>
-      <AnimatedBackground src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
+      <div >
+    {/* <div >
+        <AnimatedBackground  src="https://lottie.host/74df5d92-1d3d-4988-89ab-a4e2781f6fef/ljHYmPbE7e.lottie" />
+      </div> */}
 
-      <div className="relative z-10 px-6 py-12">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
-          All Habits
-        </h2>
+      <div className="relative min-h-screen overflow-hidden container mx-auto">
+        <title> Habit-Tracker: Public Habits</title>
 
-        {/*  Search kora*/}
-        <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
-          <input
-            type="text"
-            placeholder="Search habits..."
-            className="input input-bordered w-full sm:w-1/2"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          {/* cate diye khojo */}
-          <select
-            className="select select-bordered w-full sm:w-1/3"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
+        <div className="relative z-10 px-6 py-12">
+          <h2 className="text-3xl font-bold text-center text-base-800 mb-10">
+            All Habits
+          </h2>
+
+          {/*  Search kora*/}
+          <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <input
+              type="text"
+              placeholder="Search habits..."
+              className="input input-bordered w-full sm:w-1/2"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            {/* cate diye khojo */}
+            <select
+              className="select select-bordered w-full sm:w-1/3"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <ScrollFadeUp>
+            {loading ? <Spinner /> : <HabbitCard habits={filteredHabits} />}
+          </ScrollFadeUp>
         </div>
-
-        <ScrollFadeUp>
-          {loading ? <Spinner /> : <HabbitCard habits={filteredHabits} />}
-        </ScrollFadeUp>
       </div>
-      
     </div>
   );
 };

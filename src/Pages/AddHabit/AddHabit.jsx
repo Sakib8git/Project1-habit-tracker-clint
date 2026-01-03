@@ -161,7 +161,7 @@ const AddHabit = () => {
                       type="text"
                       value={user?.displayName || ""}
                       readOnly
-                      className="input w-full rounded-full bg-gray-100 text-gray-500"
+                      className="input w-full rounded-full bg-base-100 text-gray-500"
                     />
                   </div>
                   <div>
@@ -170,7 +170,7 @@ const AddHabit = () => {
                       type="email"
                       value={user?.email || ""}
                       readOnly
-                      className="input w-full rounded-full bg-gray-100 text-gray-500"
+                      className="input w-full rounded-full bg-base-100 text-gray-500"
                     />
                   </div>
                 </div>

@@ -60,19 +60,23 @@ const NavBar = () => {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
+
+            <li>
+              <NavLink to="/browse">Browse Public Habits</NavLink>
+            </li>
             {user && (
               <>
                 <li>
+                  <NavLink to="/dashboard">Dashboard</NavLink>
+                </li>
+                {/* <li>
                   <NavLink to="/add-habit">Add Habit</NavLink>
                 </li>
                 <li>
                   <NavLink to="/my-habits">My Habits</NavLink>
-                </li>
+                </li> */}
               </>
             )}
-            <li>
-              <NavLink to="/browse">Browse Public Habits</NavLink>
-            </li>
 
             {/* ✅ Theme toggle inside mobile dropdown */}
             <li>
@@ -100,19 +104,23 @@ const NavBar = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
+          <li>
+            <NavLink to="/browse">Browse Public Habits</NavLink>
+          </li>
           {user && (
             <>
               <li>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+
+              {/* <li>
                 <NavLink to="/add-habit">Add Habit</NavLink>
               </li>
               <li>
                 <NavLink to="/my-habits">My Habits</NavLink>
-              </li>
+              </li> */}
             </>
           )}
-          <li>
-            <NavLink to="/browse">Browse Public Habits</NavLink>
-          </li>
         </ul>
       </div>
 
@@ -159,13 +167,13 @@ const NavBar = () => {
                 <li className="text-sm font-bold">{user.displayName}</li>
                 <li className="text-xs mb-2">{user.email}</li>
                 <li>
-                  <Link
+                  {/* <Link
                     to="/update-profile"
                     className="flex items-center gap-2 cursor-pointer"
                   >
                     <FaUserEdit className="text-lg text-primary" />
                     Update Profile
-                  </Link>
+                  </Link> */}
                 </li>
                 <li>
                   <button
