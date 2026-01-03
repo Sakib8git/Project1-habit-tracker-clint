@@ -102,7 +102,7 @@ const StyledWrapper = styled.div`
   .card:hover {
     transform: scale(1.08);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-    background-color: rgba(255, 255, 255, 0.1);
+    // background-color: rgba(255, 255, 255, 0.1);
     color: #333;
   }
 

@@ -32,8 +32,8 @@ useEffect(() => {
           {feedbacks.map((fb) => (
             <div key={fb._id} className="card">
               <div className="text-3xl mb-2 z-10 relative">{fb.mood}</div>
-              <p className="text-gray-700 italic mb-4 z-10 relative">"{fb.entry}"</p>
-              <p className="text-sm text-gray-500 font-semibold text-right z-10 relative">
+              <p className="text-base-700 italic mb-4 z-10 relative">"{fb.entry}"</p>
+              <p className="text-sm text-base-500 font-semibold text-right z-10 relative">
                 — {fb.name}
               </p>
             </div>
@@ -49,7 +49,7 @@ export default TopFeedback;
 const StyledWrapper = styled.div`
   .card {
     position: relative;
-    background: white;
+    // background: white;
     padding: 1.5rem;
     border-radius: 1rem;
     border: 1px solid #e5e7eb;
@@ -81,6 +81,10 @@ const StyledWrapper = styled.div`
     left: 0;
     border-radius: 0 100% 0 15px;
   }
+
+.card:hover {
+  color: #1f2937; 
+}
 
   .card:hover::before,
   .card:hover::after {

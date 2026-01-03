@@ -52,11 +52,11 @@ const Feedback = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-xl mx-auto bg-gray-100 p-6 rounded-xl shadow-md"
+        className="max-w-xl mx-auto bg-base-200 p-6 rounded-xl shadow-md"
       >
         {/* Name Field */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
+          <label className="block text-base-700 font-semibold mb-2">
             Your Name
           </label>
           <input
@@ -71,7 +71,7 @@ const Feedback = () => {
 
         {/* Mood Selector */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
+          <label className="block text-base-700 font-semibold mb-2">
             How was your experience today?
           </label>
           <select
@@ -89,7 +89,7 @@ const Feedback = () => {
 
         {/* Feedback Textarea */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-semibold mb-2">
+          <label className="block text-base-700 font-semibold mb-2">
             Leave your comments or suggestions
           </label>
           <textarea
