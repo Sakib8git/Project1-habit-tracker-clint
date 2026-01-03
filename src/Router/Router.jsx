@@ -15,6 +15,7 @@ import Spinner from "../Components/Spinner/Spinner";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Profile/profile";
 import ContactPage from "../Pages/Contact/ContactPage";
+import AboutPage from "../Pages/AboutPage/AboutPage";
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 export const router = createBrowserRouter([
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
         loader: async () => {
           const API_BASE = import.meta.env.VITE_API_BASE;
           const res = await fetch(`${API_BASE}/habits`);
-          return res.json(); 
+          return res.json();
         },
       },
 
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         Component: ContactPage,
+      },
+      {
+        path: "about",
+        Component: AboutPage,
       },
       {
         path: "habits/:id",
