@@ -14,6 +14,7 @@ import UpdateProfile from "../Pages/UpdateUser/UpdateProfile";
 import Spinner from "../Components/Spinner/Spinner";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Profile/profile";
+import ContactPage from "../Pages/Contact/ContactPage";
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 export const router = createBrowserRouter([
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register,
+      },
+      {
+        path: "contact",
+        Component: ContactPage,
       },
       {
         path: "habits/:id",

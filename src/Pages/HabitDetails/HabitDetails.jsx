@@ -150,7 +150,7 @@ const HabitDetails = () => {
         </div>
 
         <button
-          className="btn bg-green-600 text-white hover:bg-green-700 w-full disabled:opacity-50"
+          className="btn bg-green-500 text-white hover:bg-green-600 w-full disabled:opacity-50"
           onClick={handleMarkComplete}
           disabled={alreadyMarked || marking}
         >

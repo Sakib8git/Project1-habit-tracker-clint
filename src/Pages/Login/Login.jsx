@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../AuthContext/AuthContext";
-import { useNavigate, Link } from "react-router"; 
+import { useNavigate, Link } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import Button from "../../Custom Button/Button";
@@ -50,21 +50,21 @@ const Login = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-20 px-3">
       <title>Login</title>
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-center text-black mb-6">
+      <div className="w-full max-w-md bg-base-300 rounded-lg shadow-lg p-8">
+        <h1 className="text-3xl font-bold text-center  mb-6">
           Login to <span className="text-green-600">Habit-Tracker</span>
         </h1>
 
         {/* ✅ Login Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm mb-1 text-black">Email</label>
+            <label className="block text-sm mb-1 ">Email</label>
             <input
               type="email"
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 rounded-md bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 rounded-md bg-base-200  focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your email"
               required
             />
@@ -78,7 +78,7 @@ const Login = () => {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 rounded-md bg-gray-100 text-black pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 rounded-md bg-base-200  pr-10 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Enter your password"
                 required
               />
@@ -115,7 +115,7 @@ const Login = () => {
           Continue with Google
         </button>
 
-        <p className="text-sm text-center text-gray-900 mt-4">
+        <p className="text-sm text-center  mt-4">
           Don’t have an account?{" "}
           <Link to="/register" className="text-blue-400">
             Register

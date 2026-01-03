@@ -104,7 +104,7 @@ const Feedback = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg transition-all"
+          className="w-full bg-green-500 text-white hover:bg-green-600 font-semibold py-2 px-4 rounded-lg transition-all"
         >
           Send Your Feedback
         </button>

@@ -64,6 +64,9 @@ const NavBar = () => {
             <li>
               <NavLink to="/browse">Browse Public Habits</NavLink>
             </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
             {user && (
               <>
                 <li>
@@ -93,7 +96,7 @@ const NavBar = () => {
           </ul>
         </div>
 
-        <Link to="/" className="text-3xl logo-font text-green-900 font-bold">
+        <Link to="/" className="text-3xl logo-font text-green-600 font-bold">
           Habit-Tracker
         </Link>
       </div>
@@ -107,6 +110,9 @@ const NavBar = () => {
           <li>
             <NavLink to="/browse">Browse Public Habits</NavLink>
           </li>
+          <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
           {user && (
             <>
               <li>

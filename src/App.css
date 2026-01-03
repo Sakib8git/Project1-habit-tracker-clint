@@ -109,7 +109,7 @@
   max-width: 420px;
   padding: 2rem;
   border-radius: 12px;
-  background: rgba(226, 253, 255, 0.46);
+  /* background: rgba(226, 253, 255, 0.46); */
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.151);
   backdrop-filter: blur(6px);
   /* color: #f8e6e6; */
@@ -145,7 +145,7 @@
 
 .register-card .outline {
   background: rgba(255, 255, 255, 0.04);
-  color: #1d1d1d;
+  /* color: #1d1d1d; */
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
@@ -156,7 +156,7 @@
 .register-card .muted {
   text-align: center;
   margin-top: 0.9rem;
-  color: #121212;
+  /* color: #121212; */
 }
 
 /* Field */

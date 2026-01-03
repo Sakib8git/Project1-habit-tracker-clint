@@ -7,6 +7,9 @@ import { Link, useLoaderData } from "react-router";
 import Feedback from "../../Components/DailyJournal/Feedback ";
 import GoalTracker from "../../Components/TopFeedback/TopFeedback";
 import { ScrollFadeUp } from "../../Components/AnimatedBackground/ScrollFadeUp";
+import FAQ from "../../Components/FAQ/FAQ";
+import CTASection from "../../Components/CAT/CTASection";
+import Statistics from "../../Components/Statistics/Statistics";
 
 const Home = () => {
   const data = useLoaderData();
@@ -46,6 +49,15 @@ const Home = () => {
         <div>
           <ScrollFadeUp>
             <GoalTracker></GoalTracker>
+          </ScrollFadeUp>
+          <ScrollFadeUp>
+            <FAQ></FAQ>
+          </ScrollFadeUp>
+          <ScrollFadeUp>
+            <CTASection></CTASection>
+          </ScrollFadeUp>
+          <ScrollFadeUp>
+            <Statistics></Statistics>
           </ScrollFadeUp>
         </div>
       </div>
