@@ -76,14 +76,14 @@ const Profile = () => {
 
         {/* Stats */}
         <div className=" rounded-xl py-4 px-6 shadow-inner mb-6">
-          <p className="text-3xl font-bold text-green-700">{habitsCreated}</p>
+          <p className="text-4xl  font-bold text-green-600">{habitsCreated}</p>
           <p className="text-sm ">Habits Created</p>
         </div>
 
         {/* Logout Button */}
         <button
           onClick={() => logOut()}
-          className="btn btn-secondary w-full flex justify-center items-center gap-2 text-white font-semibold hover:scale-105 transition-transform"
+          className="btn secondary-col w-full flex justify-center items-center gap-2 text-white font-semibold hover:scale-105 transition-transform"
         >
           <FaSignOutAlt /> Logout
         </button>
@@ -100,7 +100,7 @@ const Profile = () => {
             <XAxis dataKey="title" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="streak" fill="#34d399" />
+            <Bar dataKey="streak" fill="#00C950" />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -170,9 +170,9 @@ const UpdateHabit = () => {
 
           <button
             type="submit"
-            className="w-full bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg transition-all"
+            className="w-full primary-col font-semibold py-2 px-4 rounded-lg transition-all"
           >
-            ✏️ Update Habit
+            Update Habit
           </button>
         </form>
       </div>

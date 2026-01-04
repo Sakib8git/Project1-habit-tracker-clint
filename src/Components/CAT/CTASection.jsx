@@ -23,14 +23,14 @@ const CTASection = () => {
         {user ? (
           <Link
             to="/dashboard/add-habit"
-            className="inline-block bg-green-500 text-white hover:bg-green-600 font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition"
+            className="inline-block primary-col font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition"
           >
             Add Your First Habit
           </Link>
         ) : (
           <Link
             to="/login"
-            className="inline-block bg-green-500 text-white hover:bg-green-600 font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition"
+            className="inline-block primary-col font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-gray-100 transition"
           >
             Get Started Free
           </Link>

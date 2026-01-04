@@ -18,11 +18,26 @@
 .dark {
   @apply text-white;
 }
-
+.primary-col{
+  color: #fff;
+  background-color:#00C950 ;
+}
+.primary-col:hover{
+  /* color: #fff; */
+  background-color: #00A63E;
+}
+.secondary-col{
+  color: #fff;
+  background-color: #00A63E;
+}
+.secondary-col:hover{
+  /* color: #fff; */
+  background-color:#c50528 ;
+}
 
 /* src/components/button.css */
 
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 @plugin "daisyui";
 
@@ -32,10 +47,10 @@
 
 .btn-custom:active {
   @apply scale-95;
-}
+} */
 
 /* Dark mode variant */
-.dark .btn-custom {
+/* .dark .btn-custom {
   @apply btn-secondary;
 }
 
@@ -45,4 +60,6 @@
 
 .logo-font {
   font-family: "Anton", sans-serif;
-}
+} */
+
+

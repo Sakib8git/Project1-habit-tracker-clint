@@ -12,6 +12,7 @@ const MyHabits = () => {
   const [loading, setLoading] = useState(true);
   const [habits, setHabits] = useState([]);
   const API_BASE = import.meta.env.VITE_API_BASE;
+
   useEffect(() => {
     if (!user?.email) return;
     const API_BASE = import.meta.env.VITE_API_BASE;
@@ -62,17 +63,13 @@ const MyHabits = () => {
 
   const handleComplete = async (habitId) => {
     try {
-      const res = await fetch(
-        `${API_BASE}/habits/${habitId}/complete`,
-
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.accessToken}`,
-          },
-        }
-      );
+      const res = await fetch(`${API_BASE}/habits/${habitId}/complete`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      });
 
       const data = await res.json();
 
@@ -82,9 +79,7 @@ const MyHabits = () => {
       }
 
       if (data.alreadyCompleted) {
-        toast.info(
-          "⛔ Already Completed. You’ve already completed this habit today."
-        );
+        toast.info("⛔ Already Completed. You’ve already completed this habit today.");
       } else if (data.success) {
         toast.success("✅ Completed! Habit marked as complete.");
         setHabits((prev) =>
@@ -111,6 +106,21 @@ const MyHabits = () => {
           <div className="flex justify-center">
             <Spinner />
           </div>
+        ) : habits.length === 0 ? (
+          <div className="text-center mt-10 space-y-4">
+            <p className="text-lg font-medium">
+              🚫 No habits found. Start building your journey today!
+            </p>
+            <p className="text-sm text-gray-600">
+              Explore our web app and create your first habit to track progress and stay motivated.
+            </p>
+            <Link
+              to="/dashboard/add-habit"
+              className="btn primary-col font-semibold px-6 py-3 rounded-lg shadow"
+            >
+              Add Your First Habit
+            </Link>
+          </div>
         ) : (
           <>
             {/* ✅ Table for sm+ screens */}
@@ -131,9 +141,7 @@ const MyHabits = () => {
                       <tr key={habit._id} className="hover:bg-base-200">
                         <td className="py-3 px-4">{habit.title}</td>
                         <td className="py-3 px-4">{habit.category}</td>
-                        <td className="py-3 px-4">
-                          {habit.currentStreak} days
-                        </td>
+                        <td className="py-3 px-4">{habit.currentStreak} days</td>
                         <td className="py-3 px-4">
                           {new Date(habit.createdAt).toLocaleDateString()}
                         </td>
@@ -172,9 +180,7 @@ const MyHabits = () => {
                   className="bg-base-100 shadow rounded-lg p-4 flex flex-col gap-2"
                 >
                   <h3 className="font-semibold text-lg">{habit.title}</h3>
-                  <p className="text-sm text-gray-600">
-                    Category: {habit.category}
-                  </p>
+                  <p className="text-sm text-gray-600">Category: {habit.category}</p>
                   <p className="text-sm text-gray-600">
                     Streak: {habit.currentStreak} days
                   </p>

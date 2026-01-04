@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.btn-custom {
+  @apply btn btn-primary rounded-lg shadow-md;
+}
+
+.btn-custom:active {
+  @apply scale-95;
+}
+
+/* Dark mode variant */
+.dark .btn-custom {
+  @apply btn-secondary;
+}

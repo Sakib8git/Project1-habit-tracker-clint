@@ -1,103 +1,109 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-base-300   py-12 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-base-300 py-12 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo + Website Name */}
         <div>
-          <h2 className="text-3xl font-bold logo-font text-green-600 mb-2">
-            Habit-Tracker
-          </h2>
-          <p className="text-sm text-base-600">
+          <Link to="/" className="flex mb-4 items-center gap-2">
+            <img
+              src="/logo.png"
+              alt="Habit Tracker Logo"
+              className="h-12 w-auto"
+            />
+            <span className="text-2xl font-bold">Tracker</span>
+          </Link>
+          <p className="text-md text-base-600">
             Helping you build better habits with the right tools and support.
-          </p>
-          <p className="text-sm text-base-600">
-           Create, track, and manage daily habits to build streaks and boost productivity.
+            Create, track, and manage daily habits to build streaks and boost productivity.
           </p>
         </div>
 
-        {/* Contat detil */}
+        {/* Contact Detail */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Contact</h3>
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <FaEnvelope /> Contact
+          </h3>
           <ul className="space-y-2 text-sm">
-            <li>
-              <a href="#" className="hover:text-green-600">
+            <li className="flex items-center gap-2">
+              <FaEnvelope className="text-green-600" />
+              <a href="/contact" className="hover:text-green-600">
                 Email Support
               </a>
             </li>
-            <li>
-              <a href="#" className="hover:text-green-600">
-                Help Center
-              </a>
+            <li className="flex items-center gap-2">
+              <FaPhoneAlt className="text-green-600" />
+              <span>+880 1234 567890</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-green-600" />
+              <span>Khulna, Bangladesh</span>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600">
-                Location & Map
+              <a href="/about" className="hover:text-green-600">
+                About Us
               </a>
             </li>
           </ul>
         </div>
 
-        {/* Terms & Conditions */}
+        {/* Legal */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Legal</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a href="#" className="hover:text-green-600">
-                Terms & Conditions
+              <a href="/terms" className="hover:text-green-600 flex items-center gap-2">
+                <span>📜</span> Terms & Conditions
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600">
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-green-600">
-                Cookie Settings
+              <a href="/privacy" className="hover:text-green-600 flex items-center gap-2">
+                <span>🔒</span> Privacy Policy
               </a>
             </li>
           </ul>
         </div>
-      </div>
 
-      {/* Social Media Links */}
-      <div className="mt-10 mb-5 flex flex-col md:flex-row items-center justify-center text-sm text-gray-500">
-        <div className="flex gap-4 mb-4 md:mb-0">
-          <a
-            href="https://www.facebook.com/"
-            className="bg-green-600 text-white p-2 rounded-full hover:bg-green-700"
-          >
-            <FaFacebookF />
-          </a>
-          <a
-            href="https://x.com/i/flow/login"
-            className="bg-green-600 text-white p-2 rounded-full hover:bg-green-700"
-          >
-            <FaXTwitter />
-          </a>
-          <a
-            href="https://www.instagram.com/"
-            className="bg-green-600 text-white p-2 rounded-full hover:bg-green-700"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://mail.google.com/mail/u/0/#inbox"
-            className="bg-green-600 text-white p-2 rounded-full hover:bg-green-700"
-          >
-            <FaEnvelope />
-          </a>
+        {/* Social Media Links */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+          <div className="flex gap-4">
+            <a
+              href="https://www.facebook.com/"
+              className="primary-col rounded-full p-3 hover:scale-110 transition"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              href="https://x.com/i/flow/login"
+              className="primary-col rounded-full p-3 hover:scale-110 transition"
+            >
+              <FaXTwitter />
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              className="primary-col rounded-full p-3 hover:scale-110 transition"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://mail.google.com/mail/u/0/#inbox"
+              className="primary-col rounded-full p-3 hover:scale-110 transition"
+            >
+              <FaEnvelope />
+            </a>
+          </div>
         </div>
       </div>
 
       {/* Copyright */}
-      <div className="border-t-2 border-gray-300 pt-4">
+      <div className="border-t-2 border-gray-300 pt-6 mt-10">
         <p className="text-center text-sm text-gray-500">
-          © habit.com 2025. All Rights Reserved.
+          © habit-tracker.com 2025. All Rights Reserved.
         </p>
       </div>
     </footer>

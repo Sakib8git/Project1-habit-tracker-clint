@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router"; // ✅ Import Link for routing
 
 const faqs = [
   {
@@ -37,7 +38,9 @@ const FAQ = () => {
 
   return (
     <section className="max-w-4xl mx-auto px-6 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">
+        Frequently Asked Questions
+      </h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
           <div
@@ -46,7 +49,7 @@ const FAQ = () => {
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex justify-between items-center px-4 py-3 text-left font-semibold  focus:outline-none"
+              className="w-full flex justify-between items-center px-4 py-3 text-left font-semibold focus:outline-none"
             >
               {faq.question}
               <span className="text-xl">
@@ -60,6 +63,16 @@ const FAQ = () => {
             )}
           </div>
         ))}
+      </div>
+
+      {/* ✅ CTA Button */}
+      <div className="text-center mt-10 -mb-10">
+        <Link
+          to="/contact"
+          className="btn primary-col font-semibold px-6 py-3 rounded-lg shadow"
+        >
+          More Questions?
+        </Link>
       </div>
     </section>
   );

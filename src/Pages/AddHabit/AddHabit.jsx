@@ -93,7 +93,7 @@ const AddHabit = () => {
         ) : (
           <div className="card  bg-base-200 shadow-2xl rounded-2xl">
             <div className="card-body p-6">
-              <h2 className="text-2xl font-bold text-center mb-6 text-green-700">
+              <h2 className="text-4xl font-bold text-center mb-6 text-green-600">
                 Add New Habit
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -188,7 +188,7 @@ const AddHabit = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 rounded-lg transition-all"
+                  className="w-full primary-col font-semibold py-2 px-4 rounded-lg transition-all"
                 >
                   Add Habit
                 </button>

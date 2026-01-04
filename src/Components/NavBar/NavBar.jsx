@@ -99,14 +99,23 @@ const NavBar = () => {
           </ul>
         </div>
 
-        <Link to="/" className="text-3xl logo-font text-green-600 font-bold">
-          Habit-Tracker
+        <Link to="/" className="flex items-center gap-2">
+          <img
+            src="/logo.png"
+            alt="Habit Tracker Logo"
+            className="h-12 w-auto"
+          />
+          <span className="text-2xl font-bold">Tracker</span>
         </Link>
+
+        {/* <Link to="/" className="text-3xl logo-font primary-col font-bold">
+          Habit-Tracker
+        </Link> */}
       </div>
 
       {/* Center: Desktop Menu */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-4 text-sm font-medium">
+        <ul className="menu menu-horizontal px-1 gap-4 text-lg font-medium">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -165,7 +174,7 @@ const NavBar = () => {
                   <img
                     src={
                       user.photoURL ||
-                      "https://i.ibb.co/2FsfXqM/default-avatar.png"
+                      "https://i.ibb.co.com/k66HXYwv/citizen2.jpg"
                     }
                     alt="User"
                     referrerPolicy="no-referrer"

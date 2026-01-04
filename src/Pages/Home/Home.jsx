@@ -30,7 +30,7 @@ const Home = () => {
           <div className="text-center mt-4">
             <Link
               to="/browse"
-              className="btn btn-lg  bg-green-500 text-white hover:bg-green-600 rounded-full px-4 py-2"
+              className="btn btn-lg primary-col   rounded-full px-4 py-2"
             >
               All Habits
             </Link>

@@ -79,7 +79,7 @@ const UpdateProfile = () => {
           onClick={handleUpdate}
           className="btn btn-primary w-full mt-6 hover:scale-105 transition-transform duration-200"
         >
-          ✅ Save Changes
+          Save Changes
         </button>
       </div>
     </div>

@@ -16,6 +16,8 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Profile from "../Pages/Profile/profile";
 import ContactPage from "../Pages/Contact/ContactPage";
 import AboutPage from "../Pages/AboutPage/AboutPage";
+import PrivacyPage from "../Pages/Privecy page/PrivacyPage";
+import TermsPage from "../Pages/TermsPage/TermsPage";
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 export const router = createBrowserRouter([
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
       {
         path: "login",
         Component: Login,
+      },
+      {
+        path: "privacy",
+        Component: PrivacyPage,
+      },
+      {
+        path: "terms",
+        Component: TermsPage,
       },
       {
         path: "register",

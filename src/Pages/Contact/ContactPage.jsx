@@ -82,15 +82,15 @@ const ContactPage = () => {
 
           <div className="flex items-center gap-3 ">
             <FaEnvelope className="text-primary" />
-            <span>support@fitmoveapp.com</span>
+            <span>support@habittracker.com</span>
           </div>
           <div className="flex items-center gap-3 ">
             <FaPhoneAlt className="text-primary" />
-            <span>+1 (555) 012-3456</span>
+            <span>+880 1234 567890</span>
           </div>
           <div className="flex items-center gap-3 ">
             <FaMapMarkerAlt className="text-primary" />
-            <span>1206 Westview Drive, San Diego, CA 92103, USA</span>
+            <span>Khulna, Bangladesh</span>
           </div>
 
           {/* Social Icons */}

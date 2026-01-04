@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router"; 
 import slide2 from "../../assets/2.png";
 import slide3 from "../../assets/3.png";
 import slide4 from "../../assets/4.png";
@@ -9,18 +10,24 @@ const slides = [
     title: "Track Your Habits Effortlessly",
     subtitle: "Build consistency with daily goals and visual progress.",
     image: slide2,
+    link: "/dashboard/my-habits",
+    buttonText: "My Habits",
   },
   {
     id: 2,
     title: "Stay Motivated Every Day",
     subtitle: "Get reminders, streaks, and rewards for staying on track.",
     image: slide3,
+    link: "/browse",
+    buttonText: "Stay Motivated",
   },
   {
     id: 3,
     title: "Your Personal Habit Dashboard",
     subtitle: "Customize your routine and monitor growth over time.",
     image: slide4,
+    link: "/dashboard",
+    buttonText: "Dashboard",
   },
 ];
 
@@ -40,20 +47,35 @@ const HeroSlider = () => {
         <div
           key={slide.id}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === current ? "opacity-90 z-10" : "opacity-0 z-0"
+            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         >
+          {/* Background Image */}
           <img
             src={slide.image}
             alt={slide.title}
             className="w-full h-full object-cover rounded-3xl"
           />
+
+          {/* ✅ Dark Overlay Mask */}
+          <div className="absolute inset-0 bg-black/60 rounded-3xl"></div>
+
           {/* Text */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 rounded-3xl z-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-black mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
               {slide.title}
             </h1>
-            <p className="text-lg md:text-xl text-purple-800 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">{slide.subtitle}</p>
+            <p className="text-lg md:text-xl text-gray-200 drop-shadow-md">
+              {slide.subtitle}
+            </p>
+
+            {/* Dynamic Button */}
+            <Link
+              to={slide.link}
+              className="mt-6 inline-block bg-green-500 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-green-600 transition"
+            >
+              {slide.buttonText}
+            </Link>
           </div>
         </div>
       ))}
